@@ -1,4 +1,4 @@
-package vendingmachine.domain;
+package spockintro.commons;
 
 import java.math.BigDecimal;
 
@@ -24,7 +24,7 @@ public class Money {
         return new Money(this.value.add(that.value));
     }
 
-    static Money money(double value){
+    public static Money money(double value){
         return new Money(value);
     }
 

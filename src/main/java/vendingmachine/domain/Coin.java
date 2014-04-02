@@ -1,7 +1,9 @@
 package vendingmachine.domain;
 
+import spockintro.commons.Money;
+
 import java.math.BigDecimal;
-import static vendingmachine.domain.Money.money;
+import static spockintro.commons.Money.money;
 
 /**
  * @author bartosz walacik

@@ -1,6 +1,8 @@
 package vendingmachine.domain;
 
-import static vendingmachine.domain.Money.money;
+import spockintro.commons.Money;
+
+import static spockintro.commons.Money.money;
 
 /**
  * @author bartosz walacik

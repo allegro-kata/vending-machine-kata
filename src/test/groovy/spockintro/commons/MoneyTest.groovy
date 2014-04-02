@@ -1,4 +1,4 @@
-package vendingmachine.domain
+package spockintro.commons
 
 import spock.lang.Specification
 

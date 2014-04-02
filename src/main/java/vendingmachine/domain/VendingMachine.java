@@ -1,8 +1,10 @@
 package vendingmachine.domain;
+import spockintro.commons.Money;
+
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
-import static vendingmachine.domain.Money.money;
+import static spockintro.commons.Money.money;
 
 public class VendingMachine {
 
