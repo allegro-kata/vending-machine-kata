@@ -9,16 +9,13 @@ import java.math.RoundingMode;
 /**
  * @author bartosz walacik
  */
-public class BddSytleJunitTest {
+public class BddSytleJUnitTest {
 
     /**
      * KEY POINTS:
      * - long method names are hard to read
-     * - BDD blocks are barely convention, if absent you got
-     *   complete mess
-     * - JUnit built-in assertions are pain, fluent assertions
-     *   are provided by external libraries (Fest, AssertJ, ...)
-     *   but still, they are quite heavy
+     * - BDD blocks (given, when, then) are barely convention,
+     *   if absent you got complete mess
      */
     @Test
     public void shouldHoldGivenMoneyValue(){

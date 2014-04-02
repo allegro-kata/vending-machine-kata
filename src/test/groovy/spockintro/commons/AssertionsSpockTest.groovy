@@ -12,9 +12,8 @@ class AssertionsSpockTest extends Specification {
      *  - in 'then' block you can omit assert keyword
      *  - assertions are smart, it's not plain equals(),
      *    SPOCK not bothers you with stupid false positive
-     *  - error messages are clear and readable,
-     *    no need to add custom error messages
-     *  - only last line of stack trace is shown
+     *  - error messages are clear and readable
+     *  - only the last line of stack trace is shown
      */
     def "should add two Money values"() {
         given:
