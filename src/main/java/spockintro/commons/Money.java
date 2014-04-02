@@ -31,7 +31,7 @@ public class Money {
 
     @Override
     public String toString() {
-        return value.toString();
+        return "Money("+value+")";
     }
 
     public boolean isZero() {

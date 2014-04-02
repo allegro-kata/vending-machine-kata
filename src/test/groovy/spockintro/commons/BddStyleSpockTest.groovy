@@ -11,8 +11,8 @@ class BddStyleSpockTest extends Specification {
      * KEY POINTS:
      * - use spaces and symbols in method names, test name should
      *   be human readable & descriptive
-     * - BDD blocks are required by framework
-     * - each comparison in this block is treated as assertion
+     * - BDD blocks (given, when, then, where) are required by framework
+     * - use Groovy goodness: duck typing, property access and more
      */
     def "should hold given Money value"() {
         given:
@@ -23,6 +23,6 @@ class BddStyleSpockTest extends Specification {
         def holdValue = money.value
 
         then:
-        holdValue == givenValue
+        assert holdValue == givenValue
     }
 }
