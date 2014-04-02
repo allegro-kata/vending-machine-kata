@@ -1,5 +1,10 @@
+apply plugin: 'java'
 apply plugin: "groovy"
-apply plugin: "idea"
+
+
+sourceCompatibility = 1.7
+
+targetCompatibility = 1.7
 
 repositories {
     mavenCentral()
@@ -13,8 +18,9 @@ dependencies {
 
     testCompile(
             [group: "org.codehaus.groovy", name: "groovy-all", version: "2.2.1"],
-            [group: "org.spockframework", name: "spock-core", version: "0.7-groovy-2.0"]
+            [group: "org.spockframework",  name: "spock-core", version: "0.7-groovy-2.0"]
     )
+
 
     testRuntime(
             [group: "cglib", name: "cglib-nodep", version: "2.2"], // enables mocking of classes (in addition to interfaces)
