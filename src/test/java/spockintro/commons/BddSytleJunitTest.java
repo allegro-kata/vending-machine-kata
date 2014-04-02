@@ -9,7 +9,7 @@ import java.math.RoundingMode;
 /**
  * @author bartosz walacik
  */
-public class BddSytleJUnitTest {
+public class BddSytleJunitTest {
 
     /**
      * KEY POINTS:

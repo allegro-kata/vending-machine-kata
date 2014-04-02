@@ -1,5 +1,7 @@
 package spockintro.commons;
 
+import com.google.common.base.Preconditions;
+
 import java.math.BigDecimal;
 
 import static com.google.common.base.Preconditions.checkArgument;
@@ -26,6 +28,8 @@ public class Money {
     }
 
     public Money add(Money that) {
+        Preconditions.checkArgument(that != null, "Operation component cannot be null");
+
         return new Money(this.value.add(that.value));
     }
 
@@ -64,6 +68,8 @@ public class Money {
     }
 
     public static BigDecimal round2(BigDecimal value) {
+        Preconditions.checkArgument(value != null, "Value cannot be null");
+
         return value.setScale(2, BigDecimal.ROUND_HALF_UP);
     }
 
