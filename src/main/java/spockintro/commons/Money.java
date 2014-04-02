@@ -20,12 +20,13 @@ public class Money {
         this.value = round2(value);
     }
 
-    public Money add(Money that) {
-        return new Money(this.value.add(that.value));
-    }
 
     public static Money money(double value){
         return new Money(value);
+    }
+
+    public Money add(Money that) {
+        return new Money(this.value.add(that.value));
     }
 
     @Override
@@ -46,22 +47,11 @@ public class Money {
 
     @Override
     public boolean equals(Object object) {
-        if (this == object) {
-            return true;
-        }
-        if (object == null) {
+        if (object == null || !(object instanceof Money)) {
             return false;
         }
 
-        if (object instanceof Money) {
-            return hasSameValue((Money) object);
-        }
-
-        return false;
-    }
-
-    private boolean hasSameValue(Money that) {
-        return value.compareTo(that.value) == 0;
+        return hasSameValue((Money) object);
     }
 
     @Override
@@ -75,5 +65,9 @@ public class Money {
 
     public static BigDecimal round2(BigDecimal value) {
         return value.setScale(2, BigDecimal.ROUND_HALF_UP);
+    }
+
+    private boolean hasSameValue(Money that) {
+        return value.compareTo(that.value) == 0;
     }
 }

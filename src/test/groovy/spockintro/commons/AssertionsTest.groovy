@@ -2,9 +2,11 @@ package spockintro.commons
 
 import spock.lang.Specification
 
-class MoneyTest extends Specification {
-
-    def "should add Money"() {
+/**
+ * @author bartosz walacik
+ */
+class AssertionsTest extends Specification {
+    def "should add two Money values"() {
         given:
         def money1 = new Money(0.5)
         def money2 = new Money(0.5)
