@@ -63,7 +63,6 @@ class StubSpockTest extends Specification {
     }
 
     /**
-     *
      * KEY POINTS:
      * - for custom values “dummy” object is returned. This could mean an object constructed from its default constructor,
      * or another stub returning default values.
