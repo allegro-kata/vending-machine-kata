@@ -1,17 +1,16 @@
 package vendingmachine.domain;
 import spockintro.commons.Money;
 
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
+
 import static spockintro.commons.Money.money;
 
 public class VendingMachine {
 
-    private Set<Coin> coinReturnTray;
+    private List<Coin> coinReturnTray;
 
     public VendingMachine() {
-        coinReturnTray = new HashSet<>();
+        coinReturnTray = new ArrayList<>();
     }
 
     public String getDisplay() {
@@ -31,9 +30,9 @@ public class VendingMachine {
     }
 
     /**
-     * @return unmodifiableSet
+     * @return unmodifiableList
      */
-    public Set<Coin> getCoinReturnTray() {
-        return Collections.unmodifiableSet(coinReturnTray);
+    public List<Coin> getCoinReturnTray() {
+        return Collections.unmodifiableList(coinReturnTray);
     }
 }
