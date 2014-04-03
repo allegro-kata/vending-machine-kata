@@ -9,10 +9,9 @@ class CustomAssertionSpockTest extends Specification {
 
     /**
      * KEY POINTS:
-     *  - consider custom assertions when testing complex objects
+     *  - consider custom assertions when testing complex responses
      */
     def "should create Royal Family"() {
-
         when:
         def queen = RoyalsFactory.createRoyalFamily()
 
@@ -23,7 +22,7 @@ class CustomAssertionSpockTest extends Specification {
         def charles = queen.children.find {it.name == "Prince Charles"}
         charles
         charles.children.size() == 2
-       // charles.children.find(it.name == "" )
-
+        charles.children.find {it.name == "Prince William" }
+        charles.children.find {it.name == "Prince Harry" }
     }
 }
