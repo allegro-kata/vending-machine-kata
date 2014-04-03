@@ -49,4 +49,17 @@ class DataDrivenSpockTest extends Specification {
         givenValue <<    [0.339d, 0.22d, 0.1d, new BigDecimal (2.333,DECIMAL32)]
         expectedValue << [0.34, 0.22, 0.1, 2.33]
     }
+
+    @Unroll
+    def "should round #givenValue.class.simpleName #givenValue to #expectedValue 2"() {
+
+        when:
+        def result = Money.round2(givenValue)
+
+        then:
+        result == expectedValue
+        def sad = ["1", "s"]
+        where:
+        [givenValue, expectedValue] << [[0.339d, 0.34],  [0.22d, 0.22],  [0.1d, 0.1],  [new BigDecimal(2.333,DECIMAL32), 2.33]]
+    }
 }
