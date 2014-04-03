@@ -24,6 +24,35 @@ class AssertionsSpockTest extends Specification {
         Money result = money1.add(money2)
 
         then:
-        result.value == 1.01
+        result.value == 1
+    }
+
+    /**
+     * KEY points:
+     * - Groovy Truth
+     * - http://docs.codehaus.org/display/GROOVY/Groovy+Truth
+     */
+    def "should evaluate assertions with Groovy Truth"() {
+
+        expect:
+        // Collection & maps
+        assert [1]          //non-empty collection -> true
+        assert ['one': 1]   //non-empty map        -> true
+
+        assert ![]          //empty collection     -> false
+        assert ![:]         //empty map           -> false
+
+        // Number
+        assert 1            //non-zero     -> true
+        assert !0           //zero         -> false
+
+        // Strings
+        assert 'a'          //non-empty    -> true
+        assert ' '          //non-empty    -> true
+        assert !''          //empty        -> false
+
+        // Object references
+        assert this         //not null     -> true
+        assert !null        //null         -> false
     }
 }
