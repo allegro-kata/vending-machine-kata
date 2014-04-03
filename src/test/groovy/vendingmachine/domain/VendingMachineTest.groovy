@@ -12,6 +12,6 @@ class VendingMachineTest extends Specification {
         then:
         vendingMachine.display == "INSERT A COIN"
         vendingMachine.balance.value == 0
-        vendingMachine.coinReturnTray == [] as Set
+        !vendingMachine.coinReturnTray
     }
 }
