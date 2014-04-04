@@ -15,7 +15,11 @@ Slot              What
                   -  DataDrivenSpockTest
 
                   .. CustomAssertionSpockTest
-18:30 -  19:30    Story 1 accept coins
+
+18:30 -  19:00    Story 1 Accept Coins, write tests in AcceptCoinsTest
+
+19:00 -  19:30    Story 2 Select Product, write src and tests
+
 19:30 -  20:00    Code Review for teams 1..10
 </pre>
 
@@ -54,6 +58,18 @@ NOTE: The temptation here will be to create Coin objects that know their value. 
   was inserted.  You will need to do something similar.  This can be simulated using strings, constants, enums,
   symbols, or something of that nature.
 
+--------------
+### 2. Select Product
+
+_As a vendor_
+_I want customers to select products_
+_So that I can give them an incentive to put money in the machine_
+
+There are three products: cola for $1.00, chips for $0.50, and candy for $0.65.  When the respective button is pressed
+and enough money has been inserted, the product is dispensed and the machine displays THANK YOU.  If the display is
+checked again, it will display INSERT COINS and the current amount will be set to $0.00.  If there is not enough money
+inserted then the machine displays PRICE and the price of the item and subsequent checks of the display will display
+either INSERT COINS or the current amount as appropriate.
 
 ------------
 # See

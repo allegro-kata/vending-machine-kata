@@ -49,7 +49,7 @@ _I want to be notified via email when machine runs out of product_
 
 Vending machine has one shelve per product, each with 10 items capacity. Full machine contains 10x cola, 10x chips and 10x candy.
 
-Each time when user selects sold out product machine should do two things:
+Each time when user selects sold out product, machine should do two things:
 
 1. display NO ${productName}, SORRY
 1. send email to vendor with supply request
