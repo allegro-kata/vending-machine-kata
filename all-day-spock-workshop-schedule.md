@@ -3,24 +3,10 @@
 Based on
 http://github.com/guyroyse/vending-machine-kata
 
-------------
-### 1. Accept Coins
-
-_As a vendor_
-_I want a vending machine that accepts coins_
-_So that I can collect money from the customer_
-
-The vending machine will accept valid coins (nickels, dimes, and quarters) and reject invalid one (pennies).  When a
-valid coin is inserted the amount of the coin will be added to the current amount and the display will be updated.
-When there are no coins inserted, the machine displays INSERT COIN.  Rejected coins are placed in the coin return.
-
-NOTE: The temptation here will be to create Coin objects that know their value.  However, this is not how a real
-  vending machine works.  Instead, it identifies coins by their weight and size and then assigned a value to what
-  was inserted.  You will need to do something similar.  This can be simulated using strings, constants, enums,
-  symbols, or something of that nature.
+...
 
 --------------
-### 2. Select Product
+### 3. Select Product
 
 _As a vendor_
 _I want customers to select products_
@@ -33,7 +19,7 @@ inserted then the machine displays PRICE and the price of the item and subsequen
 either INSERT COINS or the current amount as appropriate.
 
 -----------
-### 3. Make Change
+### 4. Make Change
 
 _As a vendor_
 _I want customers to receive correct change_
@@ -43,7 +29,7 @@ When a product is selected that costs less than the amount of money in the machi
 in the coin return.
 
 -----------
-### 4. Storage & eMails
+### 5. Storage & eMails
 _As a venodr_
 _I want to be notified via email when machine runs out of product_
 

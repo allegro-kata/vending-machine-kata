@@ -16,9 +16,9 @@ Slot              What
 
                   .. CustomAssertionSpockTest
 
-18:30 -  19:00    Story 1 Accept Coins, write tests in AcceptCoinsTest
+18:30 -  19:00    Story 1. Accept Coins, write tests in AcceptCoinsTest
 
-19:00 -  19:30    Story 2 Select Product, write src and tests
+19:00 -  19:30    Story 2. Accept Coins - corner case, write src and tests
 
 19:30 -  20:00    Code Review for teams 1..10
 </pre>
@@ -49,12 +49,24 @@ _As a vendor_
 _I want a vending machine that accepts coins_
 _So that I can collect money from the customer_
 
-The vending machine will accept valid coins (nickels, dimes, and quarters) and reject invalid one (pennies).  When a
+The vending machine will accept valid coins (nickels, dimes, and quarters) and reject invalid one (pennies).When a
 valid coin is inserted the amount of the coin will be added to the current amount and the display will be updated.
 When there are no coins inserted, the machine displays INSERT COIN.  Rejected coins are placed in the coin return.
 
+------------
+### 2. Accept Coins - corner case
+
+_As a vendor_
+_I want a vending machine to reject coin_
+_when internal Coin Cassette is full_
+
+The vending machine has internal Coin Cassette with
+dedicated tubes for each coin type. When machine is not serviced properly, tubes can be full.
+In such case, when client inserts a valid coin, it should be rejected
+and machine should display CASSETTE IS FULL, SORRY.
+
 --------------
-### 2. Select Product
+### 3. Select Product
 
 _As a vendor_
 _I want customers to select products_
