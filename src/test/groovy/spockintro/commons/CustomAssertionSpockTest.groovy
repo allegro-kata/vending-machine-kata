@@ -17,12 +17,26 @@ class CustomAssertionSpockTest extends Specification {
 
         then:
         queen.name == "Queen Elizabeth"
-        queen.children.size() == 2
-        queen.children.find {it.name == "Diana"}
+        queen.children.collect{it.name} as Set == ["Prince Charles", "Diana"] as Set
         def charles = queen.children.find {it.name == "Prince Charles"}
         charles
-        charles.children.size() == 2
-        charles.children.find {it.name == "Prince William" }
-        charles.children.find {it.name == "Prince Harry" }
+        charles.children.collect{it.name} as Set == ["Prince William", "Prince Harry"] as Set
+    }
+
+    /**
+     * KEY POINTS:
+     *  - custom assertions should use DSL
+     */
+    def "should create Royal Family - custom assertion"() {
+
+        when:
+        def queen = RoyalsFactory.createRoyalFamily()
+
+        then:
+        RoyalsAssert.assertThat(queen)
+                    .hasName("Queen Elizabeth")
+                    .hasChildren("Diana","Prince Charles") //change to check pretty assertion error message
+                    .andChild("Prince Charles")
+                    .hasChildren("Prince William", "Prince Harry")
     }
 }
