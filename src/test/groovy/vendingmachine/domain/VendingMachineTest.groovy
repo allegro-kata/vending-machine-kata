@@ -7,7 +7,7 @@ class VendingMachineTest extends Specification {
 
     def "should display 'insert a coin' when ready"() {
         when:
-        def vendingMachine = new VendingMachine()
+        def vendingMachine = new VendingMachine(Stub(ProductMagazine), Stub(CoinCassette))
 
         then:
         vendingMachine.display == "INSERT A COIN"

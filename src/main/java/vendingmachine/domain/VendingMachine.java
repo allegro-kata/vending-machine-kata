@@ -1,4 +1,5 @@
 package vendingmachine.domain;
+import com.google.common.base.Preconditions;
 import spockintro.commons.Money;
 
 import java.util.*;
@@ -7,10 +8,15 @@ import static spockintro.commons.Money.money;
 
 public class VendingMachine {
 
-    private List<Coin> coinReturnTray;
+    private final List<Coin> coinReturnTray = new ArrayList<>();
+    private final ProductMagazine magazine;
+    private final CoinCassette cassette;
 
-    public VendingMachine() {
-        coinReturnTray = new ArrayList<>();
+    public VendingMachine(ProductMagazine magazine, CoinCassette cassette) {
+        Preconditions.checkArgument(magazine != null, "magazine can't be null");
+        Preconditions.checkArgument(cassette != null, "cassette can't be null");
+        this.cassette = cassette;
+        this.magazine = magazine;
     }
 
     public String getDisplay() {
