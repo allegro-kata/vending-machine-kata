@@ -33,7 +33,7 @@ class CustomAssertionSpockTest extends Specification {
         def queen = RoyalsFactory.createRoyalFamily()
 
         then:
-        RoyalsAssert.assertThat(queen)
+        RoyalsJAssert.assertThat(queen)
                     .hasName("Queen Elizabeth")
                     .hasChildren("Diana","Prince Charles") //change to check pretty assertion error message
                     .andChild("Prince Charles")

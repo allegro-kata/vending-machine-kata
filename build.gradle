@@ -18,9 +18,9 @@ dependencies {
 
     testCompile(
             [group: "org.codehaus.groovy", name: "groovy-all", version: "2.2.1"],
-            [group: "org.spockframework",  name: "spock-core", version: "0.7-groovy-2.0"]
+            [group: "org.spockframework",  name: "spock-core", version: "0.7-groovy-2.0"],
+            [group: "org.assertj",  name: "assertj-core", version: "1.6.0"]
     )
-
 
     testRuntime(
             [group: "cglib", name: "cglib-nodep", version: "2.2"], // enables mocking of classes (in addition to interfaces)

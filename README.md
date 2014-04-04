@@ -10,7 +10,11 @@
 <pre>
 Slot              What
 18:00 -  18:30    Spock Intro:
-                  - BddStyleSpockTest
+                  -  BddStyleSpockTest
+                  -  AssertionsSpockTest
+                  -  DataDrivenSpockTest
+
+                  .. CustomAssertionSpockTest
 18:30 -  19:30    Story 1 accept coins
 19:30 -  20:00    Code Review for teams 1..10
 </pre>
