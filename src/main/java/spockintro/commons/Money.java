@@ -34,6 +34,10 @@ public class Money {
         return "Money("+value+")";
     }
 
+    public String format() {
+        return value.toString();
+    }
+
     public boolean isZero() {
         return this.equals(money(0));
     }
