@@ -50,8 +50,9 @@ _I want a vending machine that accepts coins_
 _So that I can collect money from the customer_
 
 The vending machine will accept valid coins (nickels, dimes, and quarters) and reject invalid one (pennies).When a
-valid coin is inserted the amount of the coin will be added to the current amount and the display will be updated.
-When there are no coins inserted, the machine displays INSERT COIN.  Rejected coins are placed in the coin return.
+valid coin is inserted the amount of the coin will be added to the current amount and the display will be
+updated (use pattern: CREDIT 9.99).
+When there are no coins inserted, the machine displays INSERT COIN. Rejected coins are placed in the coin return.
 
 ------------
 ### 2. Accept Coins - corner case
@@ -65,6 +66,9 @@ dedicated tubes for each coin type. When machine is not serviced properly, tubes
 In such case, when client inserts a valid coin, it should be rejected
 and machine should display CASSETTE IS FULL, SORRY.
 
+If the display is
+checked again, it will display INSERT COINS or CREDIT, depending on current state.
+
 --------------
 ### 3. Select Product
 
@@ -73,7 +77,9 @@ _I want customers to select products_
 _So that I can give them an incentive to put money in the machine_
 
 There are three products: cola for $1.00, chips for $0.50, and candy for $0.65.  When the respective button is pressed
-and enough money has been inserted, the product is dispensed and the machine displays THANK YOU.  If the display is
+and enough money has been inserted, the product is dispensed and the machine displays THANK YOU.
+
+If the display is
 checked again, it will display INSERT COINS and the current amount will be set to $0.00.  If there is not enough money
 inserted then the machine displays PRICE and the price of the item and subsequent checks of the display will display
 either INSERT COINS or the current amount as appropriate.
