@@ -57,7 +57,7 @@ When there are no coins inserted, the machine displays INSERT COIN.  Rejected co
 ### 2. Accept Coins - corner case
 
 _As a vendor_
-_I want a vending machine to reject coin_
+_I want a vending machine to reject a coin_
 _when internal Coin Cassette is full_
 
 The vending machine has internal Coin Cassette with
