@@ -67,7 +67,7 @@ In such case, when client inserts a valid coin, it should be rejected
 and machine should display CASSETTE IS FULL, SORRY.
 
 If the display is
-checked again, it will display INSERT COINS or CREDIT, depending on current state.
+checked again, it will show INSERT COINS or CREDIT, depending on current state.
 
 --------------
 ### 3. Select Product
@@ -80,7 +80,7 @@ There are three products: cola for $1.00, chips for $0.50, and candy for $0.65. 
 and enough money has been inserted, the product is dispensed and the machine displays THANK YOU.
 
 If the display is
-checked again, it will display INSERT COINS and the current amount will be set to $0.00.  If there is not enough money
+checked again, it will show INSERT COINS and the current amount will be set to $0.00.  If there is not enough money
 inserted then the machine displays PRICE and the price of the item and subsequent checks of the display will display
 either INSERT COINS or the current amount as appropriate.
 
