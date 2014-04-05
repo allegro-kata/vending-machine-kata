@@ -26,7 +26,7 @@ public interface CoinCassette {
     void push(Coin toTube);
 
     /**
-     * @param EmptyTubeException
+     * @throws EmptyTubeException
      */
     void pop(Coin fromTube);
 }
