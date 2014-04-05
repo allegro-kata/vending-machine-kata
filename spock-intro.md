@@ -1,8 +1,3 @@
-
-
-
-
-------------
 # BDD Big Picture
 
 <table>
@@ -42,4 +37,11 @@
 </table>
 
 ------------
-# SPOCK Big Picture
+# Spock Big Picture
+
+* Designed as testing framework for Groovy applications
+* Now, Spock integrates seamlessly with Java ecosysten.
+  Thanks to its JUnit runner, Spock is compatible with most IDEs, build tools, and CI servers
+* Excellent support in IntelliJ IDEA
+* Groovy is a dynamic and 'cool' language for JVM. Is it suitable for writing large, enterprise systems?
+  Not sure, but its an excellent choice for writing tests against Java code.

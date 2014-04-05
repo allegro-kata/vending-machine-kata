@@ -1,4 +1,3 @@
-------------
 # 4Developers Spock Workshop - 07.04.2014
 
 ### Who we are:
@@ -37,8 +36,9 @@ Slot              What
 1. Kata - implement 4 user stories
 
 ------------
-# Seehttp://docs.spockframework.org
-1.
+# See
+1. <a href="http://github.com/allegro/vending-machine-kata/blob/master/spock-intro.md">Spock Big Picture</a>
+1. http://docs.spockframework.org
 1. http://groovy.codehaus.org/Groovy+style+and+language+feature+guidelines+for+Java+developers
 
 ------------
@@ -47,7 +47,6 @@ Slot              What
 Based on
 http://github.com/guyroyse/vending-machine-kata
 
-------------
 ### 1. Accept Coins
 
 _As a vendor_
