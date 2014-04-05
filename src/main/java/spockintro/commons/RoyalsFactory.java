@@ -18,11 +18,12 @@ public class RoyalsFactory {
      * </pre>
      */
     public static Royals createRoyalFamily() {
-        Royals queen = new Royals("Queen Elizabeth");
+        NameDecorator nameDecorator = new DefaultNameDecorator();
+        Royals queen = new Royals(nameDecorator, "Queen Elizabeth");
 
-        Royals charles = new Royals("Prince Charles");
+        Royals charles = new Royals(nameDecorator, "Prince Charles");
         queen.addChild(charles);
-        queen.addChild(new Royals("Diana"));
+        queen.addChild(new Royals(nameDecorator, "Diana"));
 
         return queen;
     }

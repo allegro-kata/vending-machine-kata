@@ -9,17 +9,16 @@ class StubSpockTest extends Specification {
      * KEY POINTS:
      * - you can teach stub by double less-than sign
      */
-    def "Teach Stub"() {
-
-        given:
-        Money money = Stub()
-        money.getValue() >> BigDecimal.TEN
+    def "Should return name with correct prefix"() {
 
         when:
-        BigDecimal value = money.getValue()
+        NameDecorator nameDecorator = Stub()
+        nameDecorator.getPrefix() >> "mr"
+
+        Royals royals = new Royals(nameDecorator, "Harold")
 
         then:
-        value == BigDecimal.TEN
+        royals.name == "mr Harold"
     }
 
     /**
@@ -28,16 +27,13 @@ class StubSpockTest extends Specification {
      *      for primitive types, the primitive type’s default value is returned.
      *      for non-primitive numerical values (like BigDecimal), zero is returned.
      */
-    def "Default value not only for primitive types"() {
-
-        given:
-        Money money = Stub()
+    def "Should return default value"() {
 
         when:
-        BigDecimal value = money.getValue()
+        Royals royals = new Royals(Stub(NameDecorator), "Harold")
 
         then:
-        value == BigDecimal.ZERO
+        royals.name == "Harold"
     }
 
     /**
@@ -58,27 +54,14 @@ class StubSpockTest extends Specification {
         list.isEmpty()
     }
 
+    //TODO
+//    expect:
+//    // Collection & maps
+//    assert [1]          //non-empty collection -> true
+//    assert ['one': 1]   //non-empty map        -> true
     class DummyListContainer {
         List getList() { }
+        BigDecimal getBigDecimal() { }
+        DummyListContainer getDummyListContainer() { }
     }
-
-    /**
-     * KEY POINTS:
-     * - for custom values “dummy” object is returned. This could mean an object constructed from its default constructor,
-     * or another stub returning default values.
-     *
-     * See class org.spockframework.mock.EmptyOrDummyResponse for the details
-     */
-    def "Dummy objects for custom classes"() {
-
-        given:
-        Money money = Stub()
-
-        when:
-        Money sum = money.add(new Money(2))
-
-        then:
-        sum != null
-    }
-
 }

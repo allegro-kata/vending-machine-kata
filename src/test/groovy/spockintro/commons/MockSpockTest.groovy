@@ -5,29 +5,23 @@ import spock.lang.Specification
 
 class MockSpockTest extends Specification {
 
-    def "mocking"() {
+    /**
+     * KEY POINTS:
+     * - you can verify interaction
+     * - you can teach mock by double less-than sign
+     * - mocks don't return default value for non primitive types
+     */
+    def "Should return name with correct prefix"() {
         given:
-        Repository repository = Mock()
-//      another syntax:  def repository = Mock(Repository)
-        Service service = new Service(repository: repository)
+        NameDecorator nameDecorator = Mock()
+        nameDecorator.getPrefix() >> "mr"
+
+        Royals royals = new Royals(nameDecorator, "Harold")
 
         when:
-        service.findAll()
+        royals.getName()
 
         then:
-        1 * repository.findAll()
-    }
-
-    class Service {
-
-        Repository repository
-
-        void findAll() {
-            repository.findAll()
-        }
-    }
-
-    class Repository {
-        void findAll() { }
+        1 * nameDecorator.getPrefix()
     }
 }
