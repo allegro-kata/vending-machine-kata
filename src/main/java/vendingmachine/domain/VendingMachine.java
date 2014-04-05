@@ -1,11 +1,16 @@
 package vendingmachine.domain;
+
 import com.google.common.base.Optional;
 import com.google.common.base.Preconditions;
 import spockintro.commons.Money;
+
 import static vendingmachine.domain.Coin.PENNY;
 
 public class VendingMachine {
+
     private Money credit;
+    private String message;
+
     private final ProductMagazine magazine;
     private final CoinCassette cassette;
 
@@ -27,19 +32,40 @@ public class VendingMachine {
         Preconditions.checkArgument(coin != null, "coin can't be null");
 
         if (coin == PENNY){
-            return Optional.of(PENNY);
+            return rejectInvalidCoin(coin);
         }
 
-        coinAccepted(coin);
-        return Optional.absent();
+        if (!cassetteIsReady(coin)) {
+            return rejectCoinCassetteIsFull(coin);
+        } else{
+            coinAccepted(coin);
+            return Optional.absent();
+        }
     }
 
+
     public String getDisplay() {
+        if (pendingMessage()){
+            return consumeMessage();
+        }
         if (getCredit().isZero()) {
             return "INSERT A COIN";
         }
 
         return "CREDIT "+ getCredit().format();
+    }
+
+    private boolean cassetteIsReady(Coin coin) {
+        return !cassette.isFull(coin);
+    }
+
+    private Optional<Coin> rejectInvalidCoin(Coin coin) {
+        return Optional.of(coin);
+    }
+
+    private Optional<Coin> rejectCoinCassetteIsFull(Coin coin) {
+        message = "CASSETTE IS FULL, SORRY";
+        return Optional.of(coin);
     }
 
     /**
@@ -55,6 +81,15 @@ public class VendingMachine {
         credit = credit.add(coin.getMoney());
     }
 
+    private boolean pendingMessage() {
+        return message != null;
+    }
+
+    private String consumeMessage() {
+        String m = message;
+        message = null;
+        return m;
+    }
     /**
      * @return unmodifiableList
      *

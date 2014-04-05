@@ -77,9 +77,10 @@ class AcceptCoinsTest extends Specification{
 
         when:
         vendingMachine.insert(NICKEL)
-        vendingMachine.insert(DIME)
+        def result = vendingMachine.insert(DIME)
 
         then:
+        result.get() == DIME
         vendingMachine.display == "CASSETTE IS FULL, SORRY"
         vendingMachine.display == "CREDIT 0.05"
     }
