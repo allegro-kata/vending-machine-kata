@@ -2,6 +2,7 @@ package vendingmachine.domain
 
 import spock.lang.Specification
 import spock.lang.Unroll
+import vendingmachine.domain.exceptions.FullTubeException
 
 import static vendingmachine.domain.Coin.*
 
@@ -66,4 +67,20 @@ class AcceptCoinsTest extends Specification{
         result.get() == PENNY
     }
 
+    def "should say SORRY and reject valid coin if internal Coin Cassette is full"() {
+        given:
+        CoinCassette cassette = Stub(CoinCassette)
+        def vendingMachine = new VendingMachine(Stub(ProductMagazine), cassette)
+
+        cassette.isFull(DIME) >> true
+        cassette.push(DIME) >> { throw new FullTubeException(DIME) }
+
+        when:
+        vendingMachine.insert(NICKEL)
+        vendingMachine.insert(DIME)
+
+        then:
+        vendingMachine.display == "CASSETTE IS FULL, SORRY"
+        vendingMachine.display == "CREDIT 0.05"
+    }
 }

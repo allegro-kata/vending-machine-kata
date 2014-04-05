@@ -1,6 +1,8 @@
 package vendingmachine.domain;
 
 import com.google.common.collect.Multimap;
+import vendingmachine.domain.exceptions.FullTubeException;
+import vendingmachine.domain.exceptions.EmptyTubeException;
 
 /**
  * This is the place, where coins are collected.
