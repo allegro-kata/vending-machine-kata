@@ -37,6 +37,11 @@ Slot              What
 1. Kata - implement 4 user stories
 
 ------------
+# Seehttp://docs.spockframework.org
+1.
+1. http://groovy.codehaus.org/Groovy+style+and+language+feature+guidelines+for+Java+developers
+
+------------
 # User stories
 
 Based on
@@ -84,7 +89,38 @@ checked again, it will show INSERT COINS and the current amount will be set to $
 inserted then the machine displays PRICE and the price of the item and subsequent checks of the display will display
 either INSERT COINS or the current amount as appropriate.
 
-------------
-# See
-1. http://docs.spockframework.org
-1. http://groovy.codehaus.org/Groovy+style+and+language+feature+guidelines+for+Java+developers
+
+--------------
+### 3. Select Product
+
+_As a vendor_
+_I want customers to select products_
+_So that I can give them an incentive to put money in the machine_
+
+There are three products: cola for $1.00, chips for $0.50, and candy for $0.65.  When the respective button is pressed
+and enough money has been inserted, the product is dispensed and the machine displays THANK YOU.  If the display is
+checked again, it will display INSERT COINS and the current amount will be set to $0.00.  If there is not enough money
+inserted then the machine displays PRICE and the price of the item and subsequent checks of the display will display
+either INSERT COINS or the current amount as appropriate.
+
+-----------
+### 4. Make Change
+
+_As a vendor_
+_I want customers to receive correct change_
+_So that they will use the vending machine again_
+
+When a product is selected that costs less than the amount of money in the machine, then the remaining amount is placed
+in the coin return.
+
+-----------
+### 5. Storage & eMails
+_As a venodr_
+_I want to be notified via email when machine runs out of product_
+
+Vending machine has one shelve per product, each with 10 items capacity. Full machine contains 10x cola, 10x chips and 10x candy.
+
+Each time when user selects sold out product, machine should do two things:
+
+1. display NO ${productName}, SORRY
+1. send email to vendor with supply request
