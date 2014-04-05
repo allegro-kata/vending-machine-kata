@@ -75,6 +75,10 @@ public class ProductPOJO {
 
         private ProductPOJO productPOJO;
 
+        private Builder() {
+            productPOJO = new ProductPOJO();
+        }
+
         public static Builder productPOJO() {
             return new Builder();
         }

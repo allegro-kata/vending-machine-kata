@@ -8,9 +8,9 @@ import static com.googlecode.catchexception.CatchException.*;
 public class VerifyExceptionsJUnitTest {
 
     /**
-     * KEY points:
+     * KEY POINTS:
      * - try catch - so baroque, so ugly
-     * - hard to BDD, don't know where put then block
+     * - hard to BDD, don't know where put 'then' block
      */
     @Test
     public void shouldThrowIllegalArgumentExceptionWhenTryToRoundNull() {
@@ -25,7 +25,7 @@ public class VerifyExceptionsJUnitTest {
     }
 
     /**
-     * KEY points:
+     * KEY POINTS:
      * - How do I catch an exception thrown by a static method?
      *   Unfortunately, catch-exception does not support this. Fall back on try/catch blocks.
      * - Catch-exception does not provide an API to to catch exceptions that are thrown by constructors

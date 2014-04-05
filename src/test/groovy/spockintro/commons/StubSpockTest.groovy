@@ -13,7 +13,7 @@ class StubSpockTest extends Specification {
 
         when:
         NameDecorator nameDecorator = Stub()
-        nameDecorator.getPrefix() >> "mr"
+        nameDecorator.getPrefix() >> "mr "
 
         Royals royals = new Royals(nameDecorator, "Harold")
 
@@ -39,29 +39,38 @@ class StubSpockTest extends Specification {
     /**
      * KEY POINTS:
      * - for non-numerical values, an “empty” object is returned. This could mean an empty String, an empty collection.
-     *
-     *  See class org.spockframework.mock.EmptyOrDummyResponse for the details.
      */
-    def "Empty objects for collection types"() {
+    def "should return default value for collection"() {
 
         given:
         DummyListContainer dummyListContainer = Stub()
 
         when:
-        List list = dummyListContainer.getList()
+        List list = dummyListContainer.list
 
         then:
         list.isEmpty()
     }
 
-    //TODO
-//    expect:
-//    // Collection & maps
-//    assert [1]          //non-empty collection -> true
-//    assert ['one': 1]   //non-empty map        -> true
+    /**
+     * KEY POINTS:
+     * - stub stubbing also nested properties
+     */
+    def "should return default value for nested object"() {
+
+        given:
+        DummyListContainer dummyListContainer = Stub()
+
+        when:
+        List list = dummyListContainer.dummyListContainer.dummyListContainer.list
+
+        then:
+        list.isEmpty()
+    }
+
+
     class DummyListContainer {
         List getList() { }
-        BigDecimal getBigDecimal() { }
         DummyListContainer getDummyListContainer() { }
     }
 }

@@ -25,8 +25,8 @@ public class RoyalsFactory {
         queen.addChild(charles);
         queen.addChild(new Royals(nameDecorator, "Diana"));
 
-        charles.addChild(new Royals("Prince William"));
-        charles.addChild(new Royals("Prince Harry"));
+//        charles.addChild(new Royals("Prince William"));
+//        charles.addChild(new Royals("Prince Harry"));
         return queen;
     }
 }

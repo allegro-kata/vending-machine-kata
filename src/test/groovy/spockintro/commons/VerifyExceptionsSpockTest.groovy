@@ -6,9 +6,8 @@ import spock.lang.Specification
 class VerifyExceptionsSpockTest extends Specification {
 
     /**
-     * KEY points:
+     * KEY POINTS:
      * - Specification provides method thrown() and thrown(class)
-     * - you can omit parenthesis, then test looks great!
      */
     def "should throw IllegalArgumentException when try to round null"() {
 
@@ -16,12 +15,14 @@ class VerifyExceptionsSpockTest extends Specification {
         Money.round2(null)
 
         then:
-        thrown IllegalArgumentException
+        thrown(IllegalArgumentException)
+        //      another syntax: IllegalArgumentException exception = thrown()
     }
 
     /**
-     * KEY points:
+     * KEY POINTS:
      * - you can explore the exception, thrown method returns it
+     * - you can omit parenthesis, then test looks great!
      */
     def "should throw IllegalArgumentException when try to round null 2"() {
 
@@ -30,12 +31,11 @@ class VerifyExceptionsSpockTest extends Specification {
 
         then:
         def exception = thrown IllegalArgumentException
-//      another syntax: IllegalArgumentException exception = thrown()
         exception.message == "Value cannot be null"
     }
 
     /**
-     * KEY points:
+     * KEY POINTS:
      * - you can check that exception wasn't thrown
      */
     def "should not throw IllegalArgumentException when try to round correct value"() {
