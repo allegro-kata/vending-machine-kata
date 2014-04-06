@@ -12,8 +12,9 @@ class StubSpockTest extends Specification {
     def "Should return name with correct prefix"() {
 
         when:
-        NameDecorator nameDecorator = Stub()
-        nameDecorator.getPrefix() >> "mr "
+        NameDecorator nameDecorator = Stub() {
+            getPrefix() >> "mr "
+        }
 
         Royals royals = new Royals(nameDecorator, "Harold")
 

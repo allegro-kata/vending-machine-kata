@@ -97,18 +97,11 @@ class GroovyFeatureTest extends Specification {
 //    @groovy.transform.TypeChecked
     def "should register all quackable animals sound"() {
 
-        given:
-        def quackers = [ new Duck(), new Frog() ]
-        def list = []
-
         when:
-        for (q in quackers) {
-            list << q.quack()
-        }
+        def quackers = [ new Duck(), new Frog() ]
 
         then:
-        list == [ "I am a Duck", "I am a Frog" ]
-
+        quackers.collect { q -> q.quack()} == [ "I am a Duck", "I am a Frog" ]
     }
 
     class Duck {
