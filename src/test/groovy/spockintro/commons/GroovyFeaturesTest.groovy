@@ -104,7 +104,7 @@ class GroovyFeaturesTest extends Specification {
         def quackers = [ new Duck(), new Frog() ]
 
         then:
-        quackers.collect { q -> q.quack()} == [ "I am a Duck", "I am a Frog" ]
+        quackers.collect { q -> q.quack() } == [ "I am a Duck", "I am a Frog" ]
     }
 
     class Duck {
