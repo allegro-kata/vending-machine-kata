@@ -49,4 +49,19 @@ public class VerifyExceptionsJUnitTest {
         IllegalArgumentException exception = caughtException();
         assert exception.getMessage() == "Operation component cannot be null";
     }
+
+    /**
+     * KEY POINTS:
+     * - can't verify exception code, exception message
+     * - exception can be thrown from anywhere
+     */
+    @Test(expected = IllegalArgumentException.class)
+    public void shouldThrowIllegalArgumentExceptionWhenTryToRoundNull3() {
+        //given
+        Money money = new Money(1);
+
+        //when
+//      catchException(Money.round2(null)); - static, sry ;(
+        money.add(null);
+    }
 }

@@ -41,6 +41,7 @@ public class StubJavaTest {
         //when:
         NameDecorator nameDecorator = mock(NameDecorator.class);
         when(nameDecorator.getPrefix()).thenReturn("");
+
         Royals royals = new RoyalsDecorated(nameDecorator, "Harold");
 
         //then:
@@ -77,8 +78,8 @@ public class StubJavaTest {
         DummyListContainer dummyListContainer = mock(DummyListContainer.class);
         DummyListContainer nestedDummyListContainer = mock(DummyListContainer.class);
 
-        when(nestedDummyListContainer.getList()).thenReturn(Collections.EMPTY_LIST);
         when(dummyListContainer.getDummyListContainer()).thenReturn(nestedDummyListContainer);
+        when(nestedDummyListContainer.getList()).thenReturn(Collections.EMPTY_LIST);
 
         //when:
         List list = dummyListContainer.getDummyListContainer().getList();
