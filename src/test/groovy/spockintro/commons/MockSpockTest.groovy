@@ -11,7 +11,7 @@ class MockSpockTest extends Specification {
      * - you can teach mock by double less-than sign
      * - mocks don't return default value for non primitive types
      */
-    def "Should return name with correct prefix"() {
+    def "should verify interaction with collaborator"() {
         given:
         NameDecorator nameDecorator = Mock()
         nameDecorator.getPrefix() >> "mr"
