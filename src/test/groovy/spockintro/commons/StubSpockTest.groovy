@@ -56,7 +56,7 @@ class StubSpockTest extends Specification {
 
     /**
      * KEY POINTS:
-     * - stub stubbing also nested properties
+     * - stub can stub also nested properties - so stubs produce stubs
      */
     def "should return default value for nested object"() {
 
