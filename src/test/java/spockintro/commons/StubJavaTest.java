@@ -1,9 +1,7 @@
 package spockintro.commons;
 
-import com.google.common.collect.Lists;
 import org.junit.Test;
 
-import java.math.BigDecimal;
 import java.util.Collections;
 import java.util.List;
 
@@ -34,7 +32,8 @@ public class StubJavaTest {
     /**
      * KEY POINTS:
      * - for primitives types mockito return default values,
-     * but for String, primitive types wrappers, arrays, collections, custom classes it return null
+     *   but for String, primitive types wrappers, arrays,
+     *   collections, custom classes it return null
      */
     @Test
     public void shouldReturnDefaultValue() {
