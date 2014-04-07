@@ -11,6 +11,7 @@ public class Royals {
     private final String name;
     private final Set<Royals> children = new HashSet<>();
 
+
     public Royals(String name) {
         this.name = name;
     }
@@ -29,6 +30,6 @@ public class Royals {
 
     @Override
     public String toString() {
-        return "Royals("+name+")";
+        return "Royals("+getName()+")";
     }
 }

@@ -9,12 +9,15 @@
 <pre>
 Slot              What
 18:00 -  18:30    Spock Intro:
+                  -  spock-intro.md
                   -  BddStyleSpockTest
                   -  AssertionsSpockTest
                   -  DataDrivenSpockTest
-
                   .. CustomAssertionSpockTest
-
+                  -  MockSpockTest
+                  -  StubSpockTest
+                  -  VerifyExceptionsSpockTest
+                  .. GroovyFeaturesTest
 18:30 -  19:00    Story 1. Accept Coins, write tests in AcceptCoinsTest
 
 19:00 -  19:30    Story 2. Accept Coins - corner case, write src and tests
@@ -26,7 +29,7 @@ Slot              What
 # vending-machine SPOCK kata
 
 1. clone vending-machine project
-   <p><code>git clone https://spocky-all@github.com/spocky-all/vending-machine-kata.git
+   <p><code>git clone https://allegro-kata@github.com/allegro-kata/vending-machine-kata.git
    </code></p>
 1. Checkout proper branch (team01..10)
 1. If you use IntelliJ, import Gradle project and run tests normally

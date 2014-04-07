@@ -20,7 +20,7 @@ public interface ProductMagazine {
     boolean isEmpty(Product shelve);
 
     /**
-     * @param EmptyShelveException
+//     * @param EmptyShelveException
      */
     void getItem(Product fromShelve);
 }
