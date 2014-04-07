@@ -39,7 +39,8 @@ class StubSpockTest extends Specification {
 
     /**
      * KEY POINTS:
-     * - for non-numerical values, an “empty” object is returned. This could mean an empty String, an empty collection.
+     * - for non-numerical values, an “empty” object is returned.
+     *   This could mean an empty String, an empty collection.
      */
     def "should return default value for collection"() {
 
