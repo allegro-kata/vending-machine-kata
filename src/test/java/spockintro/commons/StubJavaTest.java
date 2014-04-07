@@ -25,7 +25,7 @@ public class StubJavaTest {
         NameDecorator nameDecorator = mock(NameDecorator.class);
         when(nameDecorator.getPrefix()).thenReturn("mr ");
 
-        Royals royals = new Royals(nameDecorator, "Harold");
+        Royals royals = new RoyalsDecorated(nameDecorator, "Harold");
 
         //then:
         assertEquals(royals.getName(), "mr Harold");
@@ -42,7 +42,7 @@ public class StubJavaTest {
         //when:
         NameDecorator nameDecorator = mock(NameDecorator.class);
         when(nameDecorator.getPrefix()).thenReturn("");
-        Royals royals = new Royals(nameDecorator, "Harold");
+        Royals royals = new RoyalsDecorated(nameDecorator, "Harold");
 
         //then:
         assertEquals(royals.getName(), "Harold");

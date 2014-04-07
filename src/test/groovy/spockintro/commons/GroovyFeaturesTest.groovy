@@ -5,8 +5,11 @@ import pogo.ProductPOGOv2
 import pogo.ProductPOGOv3
 import spock.lang.Specification
 
-
-class GroovyFeatureTest extends Specification {
+/**
+ * KEY POINTS:
+ * - Groovy Goodness
+ */
+class GroovyFeaturesTest extends Specification {
 
     /**
      * KEY POINTS:

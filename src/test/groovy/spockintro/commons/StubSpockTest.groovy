@@ -16,7 +16,7 @@ class StubSpockTest extends Specification {
             getPrefix() >> "mr "
         }
 
-        Royals royals = new Royals(nameDecorator, "Harold")
+        Royals royals = new RoyalsDecorated(nameDecorator, "Harold")
 
         then:
         royals.name == "mr Harold"
@@ -25,13 +25,13 @@ class StubSpockTest extends Specification {
     /**
      * KEY POINTS:
      * - values returned by a stub in such cases are more ambitious:
-     *      for primitive types, the primitive type’s default value is returned.
-     *      for non-primitive numerical values (like BigDecimal), zero is returned.
+     *   for primitive types, the primitive type’s default value is returned.
+     *   for non-primitive numerical values (like BigDecimal), zero is returned.
      */
     def "Should return default value"() {
 
         when:
-        Royals royals = new Royals(Stub(NameDecorator), "Harold")
+        Royals royals = new RoyalsDecorated(Stub(NameDecorator), "Harold")
 
         then:
         royals.name == "Harold"

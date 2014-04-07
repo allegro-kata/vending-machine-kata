@@ -1,7 +1,5 @@
 package spockintro.commons;
 
-import com.google.common.base.Preconditions;
-
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
@@ -12,17 +10,14 @@ import java.util.Set;
 public class Royals {
     private final String name;
     private final Set<Royals> children = new HashSet<>();
-    private final NameDecorator nameDecorator;
 
-    public Royals(NameDecorator nameDecorator, String name) {
-        Preconditions.checkArgument(nameDecorator != null);
 
-        this.nameDecorator = nameDecorator;
+    public Royals(String name) {
         this.name = name;
     }
 
     public String getName() {
-        return nameDecorator.getPrefix() +  name;
+        return name;
     }
 
     public void addChild(Royals child){
@@ -35,6 +30,6 @@ public class Royals {
 
     @Override
     public String toString() {
-        return "Royals("+name+")";
+        return "Royals("+getName()+")";
     }
 }

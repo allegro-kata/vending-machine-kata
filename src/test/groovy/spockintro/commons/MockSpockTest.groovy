@@ -16,7 +16,7 @@ class MockSpockTest extends Specification {
         NameDecorator nameDecorator = Mock()
         nameDecorator.getPrefix() >> "mr"
 
-        Royals royals = new Royals(nameDecorator, "Harold")
+        Royals royals = new RoyalsDecorated(nameDecorator, "Harold")
 
         when:
         royals.getName()
