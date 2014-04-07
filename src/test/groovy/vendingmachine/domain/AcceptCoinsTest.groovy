@@ -3,6 +3,7 @@ package vendingmachine.domain
 import spock.lang.Specification
 import spock.lang.Unroll
 import vendingmachine.domain.exceptions.FullTubeException
+import static vendingmachine.domain.Coin.*
 
 /**
  * Tests for user story
