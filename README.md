@@ -1,4 +1,4 @@
-# Spock Workshop - 23.04.2014 - Poznań
+# Spock Workshop - 23.04.2014 - Poznan
 
 ### Who we are:
 
@@ -24,7 +24,7 @@ Slot              What                                                       Who
 12:30 -  13:30	  Obiadek sponsorowany                                       Estella
 13:30 -  14:50	  Story 3. Select Product                                    Bartek
 15:00 -  16:30	  Story 4. Make Change                                       Paweł
-
+</pre>
 
 ------------
 # vending-machine SPOCK kata
