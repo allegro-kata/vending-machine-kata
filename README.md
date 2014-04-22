@@ -1,29 +1,30 @@
-# 4Developers Spock Workshop - 07.04.2014
+# Spock Workshop - 23.04.2014 - Poznań
 
 ### Who we are:
 
-+ Bartosz Walacik - Grupa Allegro
-+ Pawel Szymczyk - Grupa Allegro
++ Piotr Betkier  - Grupa Allegro - NAP team
++ Pawel Szymczyk - Grupa Allegro - Saturn team
++ Bartosz Walacik - Grupa Allegro - NAP team
 
 ### Agenda
 <pre>
-Slot              What
-18:00 -  18:30    Spock Intro:
-                  -  spock-intro.md
-                  -  BddStyleSpockTest
-                  -  AssertionsSpockTest
-                  -  DataDrivenSpockTest
-                  .. CustomAssertionSpockTest
-                  -  MockSpockTest
-                  -  StubSpockTest
-                  -  VerifyExceptionsSpockTest
-                  .. GroovyFeaturesTest
-18:30 -  19:00    Story 1. Accept Coins, write tests in AcceptCoinsTest
+Slot              What                                                       Who
+ 9:00 -   9:40    Spock Intro:
+                  -  spock-intro.md                                          Bartek
+                  -  GroovyFeaturesTest                                      Paweł
+                  -  BddStyleSpockTest                                       Piotrek
+                  -  AssertionsSpockTest                                     Piotrek
+                  -  VerifyExceptionsSpockTest                               Piotrek
+                  -  DataDrivenSpockTest                                     Bartek
+                  -  CustomAssertionSpockTest                                Bartek
+                  -  MockSpockTest                                           Paweł
+                  -  StubSpockTest                                           Paweł
+9:40  -  10:40    Story 1. Accept Coins, write tests in AcceptCoinsTest      Piotrek
+11:00 -  12:30	  Story 2. Accept Coins - corner case                        Piotrek
+12:30 -  13:30	  Obiadek sponsorowany                                       Estella
+13:30 -  14:50	  Story 3. Select Product                                    Bartek
+15:00 -  16:30	  Story 4. Make Change                                       Paweł
 
-19:00 -  19:30    Story 2. Accept Coins - corner case, write src and tests
-
-19:30 -  20:00    Code Review for teams 1..10
-</pre>
 
 ------------
 # vending-machine SPOCK kata
@@ -91,19 +92,6 @@ checked again, it will show INSERT COINS and the current amount will be set to $
 inserted then the machine displays PRICE and the price of the item and subsequent checks of the display will display
 either INSERT COINS or the current amount as appropriate.
 
-
---------------
-### 3. Select Product
-
-_As a vendor_
-_I want customers to select products_
-_So that I can give them an incentive to put money in the machine_
-
-There are three products: cola for $1.00, chips for $0.50, and candy for $0.65.  When the respective button is pressed
-and enough money has been inserted, the product is dispensed and the machine displays THANK YOU.  If the display is
-checked again, it will display INSERT COINS and the current amount will be set to $0.00.  If there is not enough money
-inserted then the machine displays PRICE and the price of the item and subsequent checks of the display will display
-either INSERT COINS or the current amount as appropriate.
 
 -----------
 ### 4. Make Change
