@@ -27,11 +27,14 @@ public class VerifyExceptionsJUnitTest {
     /**
      * KEY POINTS:
      * - How do I catch an exception thrown by a static method?
-     *   Unfortunately, catch-exception does not support this. Fall back on try/catch blocks.
-     * - Catch-exception does not provide an API to to catch exceptions that are thrown by constructors
+     *   Unfortunately, catch-exception does not support this.
+     *   Fall back on try/catch blocks.
+     * - Catch-exception does not provide an API to to catch
+     *   exceptions that are thrown by constructors
      *   Use builder
      * - You have to add additional library
-     * - If you want to catch both throwables and exceptions have a look at the catch-throwable packages
+     * - If you want to catch both throwables and exceptions have a look
+     *   at the catch-throwable packages
      */
     @Test
     public void shouldThrowIllegalArgumentExceptionWhenTryToRoundNull2() {
@@ -45,5 +48,20 @@ public class VerifyExceptionsJUnitTest {
         //then
         IllegalArgumentException exception = caughtException();
         assert exception.getMessage() == "Operation component cannot be null";
+    }
+
+    /**
+     * KEY POINTS:
+     * - can't verify exception code, exception message
+     * - exception can be thrown from anywhere
+     */
+    @Test(expected = IllegalArgumentException.class)
+    public void shouldThrowIllegalArgumentExceptionWhenTryToRoundNull3() {
+        //given
+        Money money = new Money(1);
+
+        //when
+//      catchException(Money.round2(null)); - static, sry ;(
+        money.add(null);
     }
 }

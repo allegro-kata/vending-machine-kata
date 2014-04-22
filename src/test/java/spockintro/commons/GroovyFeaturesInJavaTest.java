@@ -1,5 +1,6 @@
 package spockintro.commons;
 
+import com.google.common.base.Function;
 import com.google.common.collect.Lists;
 import org.junit.Test;
 import pojo.ProductPOJO;
@@ -79,9 +80,9 @@ public class GroovyFeaturesInJavaTest {
         ProductPOJOv3 product = new ProductPOJOv3("Candy");
 
         //when:
-        String productName = product.getName(new ProductPOJOv3.ProductNameTransformFunction() {
+        String productName = product.getName(new Function<String, String>() {
             @Override
-            public String transform(String name) {
+            public String apply(String name) {
                 return "The best " + name;
             }
         });

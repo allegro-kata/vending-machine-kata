@@ -1,9 +1,7 @@
 package spockintro.commons;
 
-import com.google.common.collect.Lists;
 import org.junit.Test;
 
-import java.math.BigDecimal;
 import java.util.Collections;
 import java.util.List;
 
@@ -34,7 +32,8 @@ public class StubJavaTest {
     /**
      * KEY POINTS:
      * - for primitives types mockito return default values,
-     * but for String, primitive types wrappers, arrays, collections, custom classes it return null
+     *   but for String, primitive types wrappers, arrays,
+     *   collections, custom classes it return null
      */
     @Test
     public void shouldReturnDefaultValue() {
@@ -42,6 +41,7 @@ public class StubJavaTest {
         //when:
         NameDecorator nameDecorator = mock(NameDecorator.class);
         when(nameDecorator.getPrefix()).thenReturn("");
+
         Royals royals = new RoyalsDecorated(nameDecorator, "Harold");
 
         //then:
@@ -78,8 +78,8 @@ public class StubJavaTest {
         DummyListContainer dummyListContainer = mock(DummyListContainer.class);
         DummyListContainer nestedDummyListContainer = mock(DummyListContainer.class);
 
-        when(nestedDummyListContainer.getList()).thenReturn(Collections.EMPTY_LIST);
         when(dummyListContainer.getDummyListContainer()).thenReturn(nestedDummyListContainer);
+        when(nestedDummyListContainer.getList()).thenReturn(Collections.EMPTY_LIST);
 
         //when:
         List list = dummyListContainer.getDummyListContainer().getList();

@@ -1,12 +1,10 @@
 package pojo;
 
+import com.google.common.base.Function;
+
 import java.math.BigDecimal;
 
 public class ProductPOJOv3 {
-
-    public interface ProductNameTransformFunction {
-        String transform(String name);
-    }
 
     private Long id;
     private String name;
@@ -29,8 +27,8 @@ public class ProductPOJOv3 {
         this.id = id;
     }
 
-    public String getName(ProductNameTransformFunction function) {
-        return function.transform(name);
+    public String getName(Function<String, String> function) {
+        return function.apply(name);
     }
 
     public void setName(String name) {
