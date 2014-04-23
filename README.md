@@ -3,7 +3,7 @@
 ### Who we are:
 
 + Piotr Betkier  - Grupa Allegro - NAP team
-+ Pawel Szymczyk - Grupa Allegro - Saturn team
++ Pawel Szymczyk - Grupa Allegro - Merkury team
 + Bartosz Walacik - Grupa Allegro - NAP team
 
 ### Agenda
