@@ -1,28 +1,27 @@
-# Spock Workshop - 23.04.2014 - Poznan
+# Spock Workshop - 07.05.2014 - Poznan
 
 ### Who we are:
 
 + Piotr Betkier  - Grupa Allegro - NAP team
-+ Pawel Szymczyk - Grupa Allegro - Merkury team
-+ Bartosz Walacik - Grupa Allegro - NAP team
++ Pawel Szymczyk - Grupa Allegro - Saturn team
 
 ### Agenda
 <pre>
 Slot              What                                                       Who
  9:00 -   9:40    Spock Intro:
-                  -  spock-intro.md                                          Bartek
+                  -  spock-intro.md                                          Piotrek
                   -  GroovyFeaturesTest                                      Paweł
                   -  BddStyleSpockTest                                       Piotrek
                   -  AssertionsSpockTest                                     Piotrek
                   -  VerifyExceptionsSpockTest                               Piotrek
-                  -  DataDrivenSpockTest                                     Bartek
-                  -  CustomAssertionSpockTest                                Bartek
+                  -  DataDrivenSpockTest                                     Paweł
+                  -  CustomAssertionSpockTest                                Paweł 
                   -  MockSpockTest                                           Paweł
                   -  StubSpockTest                                           Paweł
 9:40  -  10:40    Story 1. Accept Coins, write tests in AcceptCoinsTest      Piotrek
 11:00 -  12:30	  Story 2. Accept Coins - corner case                        Piotrek
 12:30 -  13:30	  Obiadek sponsorowany                                       Estella
-13:30 -  14:50	  Story 3. Select Product                                    Bartek
+13:30 -  14:50	  Story 3. Select Product                                    Paweł
 15:00 -  16:30	  Story 4. Make Change                                       Paweł
 </pre>
 
