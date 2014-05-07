@@ -2,6 +2,9 @@ package vendingmachine.domain;
 import com.google.common.base.Optional;
 import com.google.common.base.Preconditions;
 import spockintro.commons.Money;
+
+import java.math.BigDecimal;
+
 import static vendingmachine.domain.Coin.PENNY;
 
 public class VendingMachine {
@@ -9,6 +12,9 @@ public class VendingMachine {
     private final ProductMagazine magazine;
     private final CoinCassette cassette;
     private Boolean fullWarning = false;
+    private Boolean priceWarning = false;
+    private Boolean buyWarning = false;
+    private BigDecimal selectedProductPrice;
 
     public VendingMachine(ProductMagazine magazine, CoinCassette cassette) {
         Preconditions.checkArgument(magazine != null, "magazine can't be null");
@@ -40,6 +46,14 @@ public class VendingMachine {
     }
 
     public String getDisplay() {
+        if (buyWarning) {
+            buyWarning = false;
+            return "THANK YOU";
+        }
+        if (priceWarning) {
+            priceWarning = false;
+            return "PRICE " + selectedProductPrice;
+        }
         if (fullWarning) {
             fullWarning = false;
             return "CASSETTE IS FULL, SORRY";
@@ -62,6 +76,18 @@ public class VendingMachine {
     private void coinAccepted(Coin coin) throws FullTubeException {
         cassette.push(coin);
         credit = credit.add(coin.getMoney());
+    }
+
+    public Optional<Product> buy(Product product) {
+        if (credit.getValue().compareTo(product.getPrice().getValue()) < 0) {
+            selectedProductPrice = product.getPrice().getValue();
+            priceWarning = true;
+            return Optional.absent();
+        }
+        credit = new Money(credit.getValue().subtract(product.getPrice().getValue()));
+        buyWarning = true;
+        magazine.getItem(product);
+        return Optional.of(product);
     }
 
     /**
