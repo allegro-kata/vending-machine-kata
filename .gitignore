@@ -11,3 +11,4 @@ Intellij Idea project files
 build
 out
 
+/.nb-gradle/private/

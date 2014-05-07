@@ -1,5 +1,6 @@
 package vendingmachine.domain
 
+import com.google.common.base.Optional
 import spock.lang.Ignore
 import spock.lang.Specification
 import spock.lang.Unroll
@@ -12,15 +13,23 @@ import spock.lang.Unroll
  */
 class AcceptCoinsTest extends Specification{
 
-    @Ignore
     def "should display 'insert a coin' when ready"() {
-
+        given:
+            def vendingMachine = new VendingMachine(Mock(ProductMagazine), Mock(CoinCassette))
+        expect:        
+            vendingMachine.getDisplay() == "INSERT A COIN"
     }
 
-    @Ignore
     @Unroll
-    def "should accept one valid #coin and display its value as Credit"() {
-
+    def "should accept one valid #coin and display its value as Credit"(Coin coin, Optional<Coin> result) {
+        when:
+            def vendingMachine = new VendingMachine(Mock(ProductMagazine), Mock(CoinCassette))
+        then:
+            result == vendingMachine.insert(coin)
+        where:
+            coin       | result
+            Coin.DIME  | Optional.absent()
+            Coin.PENNY | Optional.of(Coin.PENNY)
     }
 
     @Ignore
