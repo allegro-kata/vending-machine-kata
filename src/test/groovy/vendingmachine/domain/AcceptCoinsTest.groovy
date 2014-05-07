@@ -43,10 +43,13 @@ class AcceptCoinsTest extends Specification{
     @Unroll
     def "should accept one valid #coin and display its value as Credit"() {
         when:
-        machine.insert(Coin.NICKEL)
+        machine.insert(coin)
 
         then:
         machine.display == "CREDIT 0.05"
+
+        where:
+        coin << [Coin.NICKEL]
     }
 
     def "should accept series of valid coins and should display the Credit"() {
