@@ -118,7 +118,7 @@ class AcceptCoinsTest extends Specification{
 
     }
 
-    @Ignore
+
     def "should display 'insert coins' when display checked again"() {
 
         given:
@@ -135,6 +135,25 @@ class AcceptCoinsTest extends Specification{
 
         then:
         vendingMachine.display == "INSERT COINS"
+    }
+
+    def "should return coins when selected product has less cost"() {
+
+        given:
+        def coin = Coin.QUARTER
+        def product = Product.CANDY
+        def vendingMachine = new VendingMachine(Stub(ProductMagazine), Stub(CoinCassette))
+        def counter = 7
+        def coinSum = counter * coin.value
+        counter.times {
+            vendingMachine.insert(coin)
+        }
+
+        when:
+        def result = vendingMachine.pushButton(product)
+
+        then:
+        result == coinSum - product.price.getValue()
     }
 
 }

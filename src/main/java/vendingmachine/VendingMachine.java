@@ -2,6 +2,9 @@ package vendingmachine.domain;
 import com.google.common.base.Optional;
 import com.google.common.base.Preconditions;
 import spockintro.commons.Money;
+
+import java.math.BigDecimal;
+
 import static vendingmachine.domain.Coin.PENNY;
 
 public class VendingMachine {
@@ -10,6 +13,7 @@ public class VendingMachine {
     private final CoinCassette cassette;
     private String msg = "";
     private String lastMsg = "";
+    private int displayFlag = -1;
 
     public VendingMachine(ProductMagazine magazine, CoinCassette cassette) {
         Preconditions.checkArgument(magazine != null, "magazine can't be null");
@@ -39,13 +43,19 @@ public class VendingMachine {
         return Optional.absent();
     }
 
-    public void pushButton(Product product) {
-        int creditDifference = product.getPrice().getValue().compareTo(getCredit().getValue());
-        if ( creditDifference == 0 || creditDifference == -1) {
+    public BigDecimal pushButton(Product product) {
 
+
+        BigDecimal diff = getCredit().getValue().subtract(product.getPrice().getValue());
+
+        int creditDifference = product.getPrice().getValue().compareTo(getCredit().getValue());
+
+        if ( creditDifference == 0 || creditDifference == -1) {
+            displayFlag = 0;
             msg = "THANK YOU";
             lastMsg = msg;
         }
+        return diff;
     }
 
     public String getDisplay() {
@@ -53,17 +63,21 @@ public class VendingMachine {
             lastMsg = "";
             msg = "INSERT COINS";
             return msg;
-        } else if (lastMsg == "THANK YOU") {
-            credit = new Money(0);
-            lastMsg = "THANK YOU";
-            return msg;
         } else if (getCredit().isZero()) {
             msg = "INSERT A COIN";
+            if (displayFlag == 0) {
+                msg = "INSERT COINS";
+            }
+        } else if (lastMsg == "THANK YOU" && !getCredit().isZero()) {
+            lastMsg = "THANK YOU";
+            credit = new Money(0);
+            return msg;
         } else if (msg == "") {
             return "CREDIT " + getCredit().format();
         }
 
         lastMsg = msg;
+        displayFlag++;
 
         return msg;
     }
