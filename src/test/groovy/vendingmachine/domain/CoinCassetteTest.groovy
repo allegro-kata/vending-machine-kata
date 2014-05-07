@@ -6,57 +6,49 @@ import spock.lang.Unroll
 class CoinCassetteTest extends Specification {
 
     @Unroll
-    def "should accept #coin when empty tube"(){
+    def "should accept #coin when empty tube"() {
 
         given:
         def coinCassette = new CoinCassetteImpl()
 
-        when:
-        def result = coinCassette.isEmpty(coin)
-
-        then:
-        result == expectedValue
+        expect:
+        coinCassette.isEmpty(coin)
 
         where:
-        coin         | expectedValue
-        Coin.DIME    | true
-        Coin.QUARTER | true
-        Coin.NICKEL  | true
+        coin << [Coin.DIME, Coin.QUARTER, Coin.NICKEL]
 
     }
 
-    def "should not accept coin when tube is full"(){
+    def "should not accept coin when tube is full"() {
 
         given:
         def coinCassette = new CoinCassetteImpl()
         def coin = Coin.NICKEL
+        coinCassette.setTubesCapacity(1)
 
         when:
-        coinCassette.setTubesCapacity(1)
         coinCassette.push(coin)
-        def result = coinCassette.isFull(coin)
 
         then:
-        result == true
+        coinCassette.isFull(coin)
     }
 
-    def "should not accept coin when tube is full on vending machine"(){
+    def "should not accept coin when tube is full on vending machine"() {
 
         given:
-        def coinCassette = new CoinCassetteImpl()
+        def coinCassette = new CoinCassetteImpl(tubesCapacity: 1)
         def machine = new VendingMachine(Stub(ProductMagazine), coinCassette)
         def coin = Coin.NICKEL
+        machine.insert(coin)
 
         when:
-        coinCassette.setTubesCapacity(1)
-        machine.insert(coin)
         machine.insert(coin)
 
         then:
         machine.display == "CASSETTE IS FULL, SORRY"
     }
 
-    def "should accept coin when 2 tube are not full on vending machine"(){
+    def "should accept coin when 2 tube are not full on vending machine"() {
 
         given:
         def coinCassette = new CoinCassetteImpl()
@@ -74,39 +66,37 @@ class CoinCassetteTest extends Specification {
         machine.display == "CREDIT $sumCoin"
     }
 
-    def "should accept coin when tube is not full on vending machine"(){
+    def "should accept coin when tube is not full on vending machine"() {
 
         given:
         def coinCassette = new CoinCassetteImpl()
         def machine = new VendingMachine(Stub(ProductMagazine), coinCassette)
         def coin = Coin.QUARTER
+        coinCassette.setTubesCapacity(1)
 
         when:
-        coinCassette.setTubesCapacity(1)
         machine.insert(coin)
 
         then:
         machine.display == "CREDIT $coin.value"
     }
 
-    def "should display 'insert coins' after message 'cassette is full'"(){
+    def "should display 'insert coins' after message 'cassette is full'"() {
 
         given:
         def coinCassette = new CoinCassetteImpl()
         def machine = new VendingMachine(Stub(ProductMagazine), coinCassette)
         def coin = Coin.NICKEL
-
-        when:
         coinCassette.setTubesCapacity(1)
         machine.insert(coin)
-        String display1 = machine.getDisplay()
+
+        when:
         machine.insert(coin)
-        String display2 = machine.getDisplay()
-        String display3 = machine.getDisplay()
+        String afterInsertingFullCoin = machine.getDisplay()
+        String secondDisplayCheck = machine.getDisplay()
 
         then:
-        display1 == "CREDIT $coin.value"
-        display2 == "CASSETTE IS FULL, SORRY"
-        display3 == "INSERT COINS"
+        afterInsertingFullCoin == "CASSETTE IS FULL, SORRY"
+        secondDisplayCheck == "INSERT COINS"
     }
 }
