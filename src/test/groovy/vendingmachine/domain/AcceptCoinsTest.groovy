@@ -42,9 +42,15 @@ class AcceptCoinsTest extends Specification{
             vendingMachine.display == "CREDIT 0.20"
     }
 
-    @Igno
+    
     def "should reject invalid coin and shouldn't change the Credit"() {
-
+        given:
+            def vendingMachine = new VendingMachine(Mock(ProductMagazine), Mock(CoinCassette))
+        when:
+            vendingMachine.insert(Coin.DIME)
+            vendingMachine.insert(Coin.PENNY)
+        then:
+            vendingMachine.display == "CREDIT 0.10"
     }
 
 }
