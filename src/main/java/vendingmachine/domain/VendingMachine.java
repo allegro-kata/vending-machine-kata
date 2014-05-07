@@ -8,6 +8,7 @@ public class VendingMachine {
     private Money credit;
     private final ProductMagazine magazine;
     private final CoinCassette cassette;
+    private boolean isRecentlyUsedTubeFull;
 
     public VendingMachine(ProductMagazine magazine, CoinCassette cassette) {
         Preconditions.checkArgument(magazine != null, "magazine can't be null");
@@ -15,6 +16,7 @@ public class VendingMachine {
         this.cassette = cassette;
         this.magazine = magazine;
         this.credit = new Money(0);
+        this.isRecentlyUsedTubeFull = false;
     }
 
     /**
@@ -30,11 +32,22 @@ public class VendingMachine {
             return Optional.of(PENNY);
         }
 
+        this.isRecentlyUsedTubeFull = false;
+        if (cassette.isFull(coin)) {
+            this.isRecentlyUsedTubeFull = true;
+            return Optional.of(coin);
+        }
+
         coinAccepted(coin);
         return Optional.absent();
+
     }
 
     public String getDisplay() {
+        if (isRecentlyUsedTubeFull) {
+            this.isRecentlyUsedTubeFull = false;
+            return "CASSETTE IS FULL, SORRY";
+        }
         if (getCredit().isZero()) {
             return "INSERT A COIN";
         }
