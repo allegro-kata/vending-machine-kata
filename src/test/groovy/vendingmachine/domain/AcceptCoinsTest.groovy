@@ -84,9 +84,10 @@ class AcceptCoinsTest extends Specification{
             def vendingMachine = new VendingMachine(Stub(ProductMagazine), coinCassette)
         when:
             vendingMachine.insert(Coin.DIME)
-            vendingMachine.display
+        then:
+            vendingMachine.display == "CASSETTE IS FULL, SORRY"
         then: 
-        vendingMachine.display == "INSERT A COIN"
+            vendingMachine.display == "INSERT A COIN"
     }
     
 }
