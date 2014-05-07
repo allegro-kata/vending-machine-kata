@@ -41,18 +41,18 @@ public class VendingMachine {
     public List<Coin> getChange() {
         List<Coin> change = new ArrayList<>();
         while (!credit.isZero()) {
-            if (getCoin(QUARTER).isPresent()) {
+            if (getChangeCoin(QUARTER).isPresent()) {
                 change.add(QUARTER);
-            } else if (getCoin(DIME).isPresent()) {
+            } else if (getChangeCoin(DIME).isPresent()) {
                 change.add(DIME);
-            } else if (getCoin(NICKEL).isPresent()) {
+            } else if (getChangeCoin(NICKEL).isPresent()) {
                 change.add(NICKEL);
             }
         }
         return change;
     }
 
-    private Optional<Coin> getCoin(Coin coin) {
+    private Optional<Coin> getChangeCoin(Coin coin) {
         if (credit.getValue().compareTo(coin.getValue()) > -1) {
             credit = new Money(credit.getValue().subtract(coin.getValue()));
             return Optional.of(coin);
