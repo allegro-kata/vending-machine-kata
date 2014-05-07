@@ -63,7 +63,19 @@ class AcceptCoinsTest extends Specification{
     }
 
     def "should reject invalid coin and shouldn't change the Credit"() {
+        given:
+        ProductMagazine magazine = Stub();
+        CoinCassette cassette = Stub();
+        def vendingMachine = new VendingMachine(magazine, cassette);
 
+        when:
+        vendingMachine.insert(Coin.NICKEL);
+        def invalidCoins = vendingMachine.insert(Coin.PENNY);
+        def displayResult = vendingMachine.display
+
+        then:
+        displayResult == 'CREDIT 0.05'
+        invalidCoins == Optional.of(Coin.PENNY);
     }
 
 }
