@@ -22,5 +22,5 @@ public interface ProductMagazine {
     /**
 //     * @param EmptyShelveException
      */
-    void getItem(Product fromShelve);
+    void getItem(Product fromShelve) throws EmptyShelfException;
 }

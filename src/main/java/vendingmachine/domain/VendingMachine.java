@@ -10,7 +10,7 @@ public class VendingMachine {
     private Money credit;
     private final ProductMagazine magazine;
     private final CoinCassette cassette;
-    private boolean isCassetteFull;
+    private String display = "INSERT A COIN";
 
     public VendingMachine(ProductMagazine magazine, CoinCassette cassette) {
         Preconditions.checkArgument(magazine != null, "magazine can't be null");
@@ -18,6 +18,16 @@ public class VendingMachine {
         this.cassette = cassette;
         this.magazine = magazine;
         this.credit = new Money(0);
+    }
+
+    public void getProduct(Product product) throws EmptyShelfException {
+        if (getCredit().isZero()) {
+            display = "INSERT A COIN";
+        } else if (getCredit().getValue().compareTo(product.getPrice().getValue()) < 0) {
+            display = "PRICE " + product.getPrice().format();
+        } else {
+            display = "THANK YOU";
+        }
     }
 
     /**
@@ -28,27 +38,34 @@ public class VendingMachine {
      */
     public Optional<Coin> insert(Coin coin) {
         Preconditions.checkArgument(coin != null, "coin can't be null");
-
-        if (isCassetteFull = cassette.isFull(coin)) {
+        if (cassette.isFull(coin)) {
+            display = "CASSETTE IS FULL, SORRY";
             return Optional.of(coin);
         }
         if (coin == PENNY) {
             return Optional.of(PENNY);
         }
-
         coinAccepted(coin);
+        if (getCredit().isZero()) {
+            display = "INSERT A COIN";
+        } else {
+            display = "CREDIT " + getCredit().getValue();
+        }
         return Optional.absent();
     }
 
     public String getDisplay() {
-        if (isCassetteFull) {
-            return "CASSETTE IS FULL, SORRY";
-        }
-        if (getCredit().isZero()) {
-            return "INSERT A COIN";
-        }
-
-        return "CREDIT " + getCredit().format();
+        return display;
+//        if (display != null) {
+//            String tempDisplay = display;
+//            display = null;
+//            return tempDisplay;
+//        }
+//        if (getCredit().isZero()) {
+//            return "INSERT A COIN";
+//        }
+//
+//        return "CREDIT " + getCredit().format();
     }
 
     /**

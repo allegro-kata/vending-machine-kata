@@ -66,19 +66,4 @@ class CassetteTest extends Specification {
         Coin.DIME    | [Coin.NICKEL, Coin.QUARTER] | 0.30
         Coin.QUARTER | [Coin.DIME, Coin.NICKEL]    | 0.15
     }
-
-    def "should display 'INSERT A COIN' when internal Coin Cassette is full and client inserts a PENNY"() {
-        given:
-        CoinCassette cassette = Stub() {
-            isFull(Coin.DIME) >> true
-        }
-        VendingMachine machine = new VendingMachine(Stub(ProductMagazine), cassette)
-
-        when:
-        machine.insert(Coin.DIME);
-        machine.insert(Coin.PENNY);
-
-        then:
-        machine.display == "INSERT A COIN"
-    }
 }
