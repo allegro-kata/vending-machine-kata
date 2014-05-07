@@ -74,4 +74,23 @@ class AcceptCoinsTest extends Specification{
         coin << [Coin.PENNY]
     }
 
+    @Unroll
+    def "should reject valid #coin coin when cassette tube is full"() {
+        given:
+        def casette = Stub(CoinCassette)    {
+            isFull(_ as Coin) >> true
+            push(_ as Coin) >> { throw new FullTubeException() }
+        }
+        def machine = new VendingMachine(Stub(ProductMagazine), casette)
+
+        when:
+        machine.insert(coin)
+
+        then:
+        machine.display == "CASSETTE IS FULL, SORRY"
+
+        where:
+        coin << [Coin.DIME, Coin.NICKEL, Coin.QUARTER]
+
+    }
 }

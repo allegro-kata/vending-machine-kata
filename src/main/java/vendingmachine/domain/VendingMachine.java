@@ -6,6 +6,7 @@ import static vendingmachine.domain.Coin.PENNY;
 
 public class VendingMachine {
     private Money credit;
+    private String errorMessage;
     private final ProductMagazine magazine;
     private final CoinCassette cassette;
 
@@ -30,15 +31,22 @@ public class VendingMachine {
             return Optional.of(PENNY);
         }
 
-        coinAccepted(coin);
-        return Optional.absent();
+        if (coinAccepted(coin)) {
+            return Optional.absent();
+        } else{
+            return Optional.of(coin);
+        }
+
     }
 
     public String getDisplay() {
-        if (getCredit().isZero()) {
+        if (!errorMessage.isEmpty()) {
+            String result = errorMessage;
+            errorMessage = "";
+            return result;
+        } else if (getCredit().isZero()) {
             return "INSERT A COIN";
         }
-
         return "CREDIT "+ getCredit().format();
     }
 
@@ -50,9 +58,15 @@ public class VendingMachine {
         return credit;
     }
 
-    private void coinAccepted(Coin coin){
-        cassette.push(coin);
-        credit = credit.add(coin.getMoney());
+    private boolean coinAccepted(Coin coin){
+        try {
+            cassette.push(coin);
+            credit = credit.add(coin.getMoney());
+            return true;
+        } catch(FullTubeException e) {
+            errorMessage = "CASSETTE IS FULL, SORRY";
+            return false;
+        }
     }
 
     /**
