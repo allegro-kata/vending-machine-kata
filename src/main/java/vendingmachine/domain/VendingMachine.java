@@ -4,6 +4,8 @@ import com.google.common.base.Optional;
 import com.google.common.base.Preconditions;
 import spockintro.commons.Money;
 
+import java.math.BigDecimal;
+
 import static vendingmachine.domain.Coin.PENNY;
 
 public class VendingMachine {
@@ -26,6 +28,7 @@ public class VendingMachine {
         } else if (getCredit().getValue().compareTo(product.getPrice().getValue()) < 0) {
             display = "PRICE " + product.getPrice().format();
         } else {
+            credit = new Money(credit.getValue().subtract(product.getPrice().getValue()));
             display = "THANK YOU";
         }
     }
@@ -56,16 +59,6 @@ public class VendingMachine {
 
     public String getDisplay() {
         return display;
-//        if (display != null) {
-//            String tempDisplay = display;
-//            display = null;
-//            return tempDisplay;
-//        }
-//        if (getCredit().isZero()) {
-//            return "INSERT A COIN";
-//        }
-//
-//        return "CREDIT " + getCredit().format();
     }
 
     /**
