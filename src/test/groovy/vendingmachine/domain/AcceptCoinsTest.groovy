@@ -78,4 +78,44 @@ class AcceptCoinsTest extends Specification{
         invalidCoins == Optional.of(Coin.PENNY);
     }
 
+    def "should reject coin when cassette full"() {
+        given:
+        ProductMagazine magazine = Stub();
+        def cassette = new MyCassette();
+        def vendingMachine = new VendingMachine(magazine, cassette);
+
+        when:
+        def invalidCoins;
+        11.times {
+            invalidCoins = vendingMachine.insert(Coin.NICKEL);
+        }
+        def displayResult = vendingMachine.display
+        def displayResultAgain = vendingMachine.display
+
+        then:
+        invalidCoins == Optional.of(Coin.NICKEL);
+        displayResult == 'CASSETTE IS FULL, SORRY'
+        displayResultAgain == "CREDIT 0.50"
+    }
+
+    def "should reject coin when cassette full stub version"() {
+        given:
+        ProductMagazine magazine = Stub();
+        CoinCassette cassette = Stub(){
+            push(Coin.NICKEL) >> {throw new FullTubeException()}
+        }
+        def vendingMachine = new VendingMachine(magazine, cassette);
+
+        when:
+        def invalidCoins = vendingMachine.insert(Coin.NICKEL);
+        def displayResult = vendingMachine.display
+        def displayResultAgain = vendingMachine.display
+
+        then:
+        invalidCoins == Optional.of(Coin.NICKEL);
+        displayResult == 'CASSETTE IS FULL, SORRY'
+        displayResultAgain == "INSERT A COIN"
+    }
+
+
 }
