@@ -3,6 +3,10 @@ import com.google.common.base.Optional;
 import com.google.common.base.Preconditions;
 import spockintro.commons.Money;
 
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
+
 import static vendingmachine.domain.Coin.PENNY;
 
 
@@ -71,14 +75,35 @@ public class VendingMachine {
         credit = credit.add(coin.getMoney());
     }
 
-    public void choose(Product product) {
+    public List<Coin> choose(Product product) {
+        List change = new ArrayList();
         if (credit.getValue().compareTo( product.getPrice().getValue() ) >= 0) {
             errorString = "THANK YOU";
             magazine.getItem(product);
+
+            BigDecimal changeAmount = credit.getValue().subtract(product.getPrice().getValue());
             credit = new Money(0);
+            change = amountToCoins(changeAmount);
         } else {
             errorString = "PRICE "+product.getPrice().format();
         }
+        return change;
+    }
+
+    protected List<Coin> amountToCoins(BigDecimal amount)
+    {
+        List<Coin> coins = new ArrayList();
+        Coin[] change = {Coin.QUARTER, Coin.DIME, Coin.NICKEL};
+        while (amount.compareTo(BigDecimal.ZERO) > 0) {
+            for(Coin coin: change) {
+                if (amount.subtract(coin.getValue()).compareTo(BigDecimal.ZERO) >= 0) {
+                    coins.add(coin);
+                    amount = amount.subtract(coin.getValue());
+                    break;
+                }
+            }
+        }
+        return coins;
     }
 
 
