@@ -14,35 +14,29 @@ import spockintro.commons.Money
  */
 class AcceptCoinsTest extends Specification{
 
-    @Ignore
     def "should display 'insert a coin' when ready"() {
-        when:
+        given:
         def vendingMachine = new VendingMachine(Stub(ProductMagazine), Stub(CoinCassette))
 
-        then:
+        expect:
         vendingMachine.getDisplay() == "INSERT A COIN"
 
     }
 
-    @Ignore
     @Unroll
     def "should accept one valid #coin and display its value as Credit"() {
-        given:
-        def coinVal = coin
 
         when:
         def vendingMachine = new VendingMachine(Stub(ProductMagazine), Stub(CoinCassette))
-        vendingMachine.insert(coinVal)
+        vendingMachine.insert(coin)
 
         then:
-
-        vendingMachine.getDisplay() == "CREDIT " + coinVal.getValue()
+        vendingMachine.display == "CREDIT $coin.value"
 
         where:
         coin << [Coin.DIME, Coin.NICKEL, Coin.QUARTER]
     }
 
-    @Ignore
     def "should accept series of valid coins and should display the Credit"() {
         given:
         def coin1 = Coin.QUARTER
@@ -62,7 +56,7 @@ class AcceptCoinsTest extends Specification{
         coin3.getValue() )
     }
 
-    @Ignore
+
     def "should reject invalid coin and shouldn't change the Credit"() {
         given:
         def coinVal = Coin.PENNY
@@ -74,7 +68,7 @@ class AcceptCoinsTest extends Specification{
         then:
 
         vendingMachine.getDisplay() == "INSERT A COIN"
-        result == Optional.of(PENNY)
+        result == Optional.of(Coin.PENNY)
 
     }
 
