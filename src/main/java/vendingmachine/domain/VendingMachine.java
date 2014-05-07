@@ -4,9 +4,13 @@ import com.google.common.base.Optional;
 import com.google.common.base.Preconditions;
 import spockintro.commons.Money;
 
-import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
+import static vendingmachine.domain.Coin.DIME;
+import static vendingmachine.domain.Coin.NICKEL;
 import static vendingmachine.domain.Coin.PENNY;
+import static vendingmachine.domain.Coin.QUARTER;
 
 public class VendingMachine {
     private Money credit;
@@ -32,6 +36,28 @@ public class VendingMachine {
             magazine.getItem(product);
             display = "THANK YOU";
         }
+    }
+
+    public List<Coin> getChange() {
+        List<Coin> change = new ArrayList<>();
+        while (!credit.isZero()) {
+            if (getCoin(QUARTER).isPresent()) {
+                change.add(QUARTER);
+            } else if (getCoin(DIME).isPresent()) {
+                change.add(DIME);
+            } else if (getCoin(NICKEL).isPresent()) {
+                change.add(NICKEL);
+            }
+        }
+        return change;
+    }
+
+    private Optional<Coin> getCoin(Coin coin) {
+        if (credit.getValue().compareTo(coin.getValue()) > -1) {
+            credit = new Money(credit.getValue().subtract(coin.getValue()));
+            return Optional.of(coin);
+        }
+        return Optional.absent();
     }
 
     /**
