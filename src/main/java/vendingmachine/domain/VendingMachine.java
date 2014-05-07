@@ -71,6 +71,17 @@ public class VendingMachine {
         credit = credit.add(coin.getMoney());
     }
 
+    public void choose(Product product) {
+        if (credit.getValue().compareTo( product.getPrice().getValue() ) >= 0) {
+            errorString = "THANK YOU";
+            magazine.getItem(product);
+            credit = new Money(0);
+        } else {
+            errorString = "PRICE "+product.getPrice().format();
+        }
+    }
+
+
     /**
      * @return unmodifiableList
      *
