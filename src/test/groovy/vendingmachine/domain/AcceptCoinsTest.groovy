@@ -89,8 +89,13 @@ class AcceptCoinsTest extends Specification{
         then:
         machine.display == "CASSETTE IS FULL, SORRY"
 
+        when:
+        def disp = machine.display
+
+        then:
+        disp == "INSERT A COIN"
+
         where:
         coin << [Coin.DIME, Coin.NICKEL, Coin.QUARTER]
-
     }
 }
