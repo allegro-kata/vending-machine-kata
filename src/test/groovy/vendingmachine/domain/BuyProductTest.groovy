@@ -14,9 +14,7 @@ class BuyProductTest extends Specification{
 
     def "should buy product when proper amount inserted"() {
         given:
-        ProductMagazine magazine = Stub();
-        CoinCassette cassette = Stub();
-        def vendingMachine = new VendingMachine(magazine, cassette);
+        def vendingMachine = new VendingMachine(Stub(ProductMagazine), Stub(CoinCassette));
 
         when:
         vendingMachine.insert(Coin.QUARTER);
@@ -30,9 +28,7 @@ class BuyProductTest extends Specification{
 
     def "should display price buy product when no proper amount inserted"() {
         given:
-        ProductMagazine magazine = Stub();
-        CoinCassette cassette = Stub();
-        def vendingMachine = new VendingMachine(magazine, cassette);
+        def vendingMachine = new VendingMachine(Stub(ProductMagazine), Stub(CoinCassette));
 
         when:
         vendingMachine.insert(Coin.QUARTER);
@@ -43,11 +39,9 @@ class BuyProductTest extends Specification{
         displayResult == 'PRICE 0.50'
     }
 
-    def "should corrwct credits after product bought"() {
+    def "should correct credits after product bought"() {
         given:
-        ProductMagazine magazine = Stub();
-        CoinCassette cassette = Stub();
-        def vendingMachine = new VendingMachine(magazine, cassette);
+        def vendingMachine = new VendingMachine(Stub(ProductMagazine), Stub(CoinCassette));
 
         when:
         vendingMachine.insert(Coin.QUARTER);
