@@ -1,13 +1,16 @@
 package vendingmachine.domain;
+
 import com.google.common.base.Optional;
 import com.google.common.base.Preconditions;
 import spockintro.commons.Money;
+
 import static vendingmachine.domain.Coin.PENNY;
 
 public class VendingMachine {
     private Money credit;
     private final ProductMagazine magazine;
     private final CoinCassette cassette;
+    private boolean isCassetteFull;
 
     public VendingMachine(ProductMagazine magazine, CoinCassette cassette) {
         Preconditions.checkArgument(magazine != null, "magazine can't be null");
@@ -23,10 +26,13 @@ public class VendingMachine {
      *
      * @return rejected coin
      */
-    public Optional<Coin> insert(Coin coin){
+    public Optional<Coin> insert(Coin coin) {
         Preconditions.checkArgument(coin != null, "coin can't be null");
 
-        if (coin == PENNY){
+        if (isCassetteFull = cassette.isFull(coin)) {
+            return Optional.of(coin);
+        }
+        if (coin == PENNY) {
             return Optional.of(PENNY);
         }
 
@@ -35,11 +41,14 @@ public class VendingMachine {
     }
 
     public String getDisplay() {
+        if (isCassetteFull) {
+            return "CASSETTE IS FULL, SORRY";
+        }
         if (getCredit().isZero()) {
             return "INSERT A COIN";
         }
 
-        return "CREDIT "+ getCredit().format();
+        return "CREDIT " + getCredit().format();
     }
 
     /**
@@ -50,7 +59,7 @@ public class VendingMachine {
         return credit;
     }
 
-    private void coinAccepted(Coin coin){
+    private void coinAccepted(Coin coin) {
         cassette.push(coin);
         credit = credit.add(coin.getMoney());
     }
@@ -59,6 +68,6 @@ public class VendingMachine {
      * @return unmodifiableList
      *
     public List<Coin> getCoinReturnTray() {
-        return Collections.unmodifiableList(coinReturnTray);
+    return Collections.unmodifiableList(coinReturnTray);
     }*/
 }

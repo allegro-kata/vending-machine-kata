@@ -31,8 +31,8 @@ class AcceptCoinsTest extends Specification{
     @Unroll
     def "should accept one valid #coin and display its value as Credit"() {
         given:
-        ProductMagazine magazine = Mock()
-        CoinCassette cassette = Mock()
+        ProductMagazine magazine = Stub()
+        CoinCassette cassette = Stub()
         VendingMachine machine = new VendingMachine(magazine, cassette)
 
         when:
@@ -50,8 +50,8 @@ class AcceptCoinsTest extends Specification{
 
     def "should accept series of valid coins and should display the Credit"() {
         given:
-        ProductMagazine magazine = Mock()
-        CoinCassette cassette = Mock()
+        ProductMagazine magazine = Stub()
+        CoinCassette cassette = Stub()
         VendingMachine machine = new VendingMachine(magazine, cassette)
 
         when:
@@ -66,8 +66,8 @@ class AcceptCoinsTest extends Specification{
 
     def "should reject invalid coin and shouldn't change the Credit"() {
         given:
-        ProductMagazine magazine = Mock()
-        CoinCassette cassette = Mock()
+        ProductMagazine magazine = Stub()
+        CoinCassette cassette = Stub()
         VendingMachine machine = new VendingMachine(magazine, cassette)
 
         when:
