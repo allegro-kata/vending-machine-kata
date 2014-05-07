@@ -2,6 +2,11 @@ package vendingmachine.domain;
 import com.google.common.base.Optional;
 import com.google.common.base.Preconditions;
 import spockintro.commons.Money;
+
+import java.math.BigDecimal;
+import java.util.Collections;
+import java.util.List;
+
 import static vendingmachine.domain.Coin.PENNY;
 
 public class VendingMachine {
@@ -9,6 +14,7 @@ public class VendingMachine {
     private String errorMessage;
     private final ProductMagazine magazine;
     private final CoinCassette cassette;
+    private List<Coin> coinReturnTray;
 
     public VendingMachine(ProductMagazine magazine, CoinCassette cassette) {
         Preconditions.checkArgument(magazine != null, "magazine can't be null");
@@ -69,10 +75,32 @@ public class VendingMachine {
         }
     }
 
+    public void buy(Product product) {
+
+        // byuing part
+
+        // change calculation part
+        BigDecimal moneyToReturn = getCredit().getValue().subtract(product.getPrice().getValue());
+        Coin[] coins = {Coin.QUARTER, Coin.DIME, Coin.NICKEL, Coin.PENNY};
+
+        while (moneyToReturn.compareTo(Coin.QUARTER.getValue()) >= 0 && !cassette.isEmpty(Coin.QUARTER)) {
+            moneyToReturn -=  Coin.QUARTER.getValue()
+            coinReturnTray.add(Coin.QUARTER)
+
+        }
+
+        // iterate on DIMEs
+
+        // iterate on NICKELs
+
+        // iterate on PENNIEs
+
+    }
+
     /**
      * @return unmodifiableList
-     *
+     */
     public List<Coin> getCoinReturnTray() {
         return Collections.unmodifiableList(coinReturnTray);
-    }*/
+    }
 }
