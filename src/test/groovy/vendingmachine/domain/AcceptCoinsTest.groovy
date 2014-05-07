@@ -12,45 +12,63 @@ import spock.lang.Unroll
  */
 class AcceptCoinsTest extends Specification{
 
+    def machine = new VendingMachine(Stub(ProductMagazine), Stub(CoinCassette))
+
+    // przed kazdym testem
+    def setup() {
+
+    }
+
+    // przed wszystkimi testami
+    def setupSpec() {
+
+    }
+
+    // po kazdym tescie
+    def cleanup() {
+
+    }
+
+    // po wszystkich testach
+    def cleanupSpec() {
+
+    }
+
     def "should display 'insert a coin' when ready"() {
-        given:
-        ProductMagazine magazine = Stub()
-        CoinCassette cassette = Stub()
-        VendingMachine machine = new VendingMachine(magazine, cassette)
 
-        when:
-        def display = machine.getDisplay()
-
-        then:
-        display == "INSERT A COIN"
-
+        expect:
+        machine.display == "INSERT A COIN"
     }
 
     @Unroll
     def "should accept one valid #coin and display its value as Credit"() {
-        given:
-        //Coin coin = new Coin()
-        ProductMagazine magazine = Stub()
-        CoinCassette cassette = Stub()
-        VendingMachine machine = new VendingMachine(magazine, cassette)
-
         when:
         machine.insert(Coin.NICKEL)
-        def display = machine.getDisplay()
 
         then:
-        display == "CREDIT 0.05"
-
+        machine.display == "CREDIT 0.05"
     }
 
-    @Ignore
     def "should accept series of valid coins and should display the Credit"() {
+        when:
+        machine.insert(coin)
 
+        then:
+        machine.display == "CREDIT $coin.value"
+
+        where:
+        coin << [Coin.DIME, Coin.NICKEL, Coin.QUARTER]
     }
 
-    @Ignore
     def "should reject invalid coin and shouldn't change the Credit"() {
+        when:
+        machine.insert(coin)
 
+        then:
+        machine.display == "INSERT A COIN"
+
+        where:
+        coin << [Coin.PENNY]
     }
 
 }
