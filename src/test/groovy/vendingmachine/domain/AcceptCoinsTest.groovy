@@ -17,7 +17,7 @@ class AcceptCoinsTest extends Specification{
         given:
             def vendingMachine = new VendingMachine(Mock(ProductMagazine), Mock(CoinCassette))
         expect:        
-            vendingMachine.getDisplay() == "INSERT A COIN"
+            vendingMachine.display == "INSERT A COIN"
     }
 
     @Unroll
@@ -32,9 +32,9 @@ class AcceptCoinsTest extends Specification{
             Coin.PENNY | Optional.of(Coin.PENNY)
     }
 
-    @Ignore
     def "should accept series of valid coins and should display the Credit"() {
-
+        
+        
     }
 
     @Ignore
