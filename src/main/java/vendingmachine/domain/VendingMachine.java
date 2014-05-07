@@ -29,6 +29,7 @@ public class VendingMachine {
             display = "PRICE " + product.getPrice().format();
         } else {
             credit = new Money(credit.getValue().subtract(product.getPrice().getValue()));
+            magazine.getItem(product);
             display = "THANK YOU";
         }
     }

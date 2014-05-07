@@ -11,7 +11,8 @@ class ProductSelectionTest extends Specification {
     @Unroll
     def "should get #product and display 'THANK YOU' when client inserts #coins"() {
         given:
-        VendingMachine machine = new VendingMachine(Stub(ProductMagazine), Stub(CoinCassette))
+        ProductMagazine magazine = Mock();
+        VendingMachine machine = new VendingMachine(magazine, Stub(CoinCassette))
 
         when:
         coins.each { machine.insert(it) }
@@ -19,6 +20,8 @@ class ProductSelectionTest extends Specification {
 
         then:
         machine.display == "THANK YOU"
+        1 * magazine.getItem(product);
+
 
         where:
         product       | coins
@@ -30,7 +33,8 @@ class ProductSelectionTest extends Specification {
     @Unroll
     def "should not get #product and display 'PRICE #product.price.value' when client inserts #coins"() {
         given:
-        VendingMachine machine = new VendingMachine(Stub(ProductMagazine), Stub(CoinCassette))
+        ProductMagazine magazine = Mock();
+        VendingMachine machine = new VendingMachine(magazine, Stub(CoinCassette))
 
         when:
         coins.each { machine.insert(it) }
@@ -38,6 +42,7 @@ class ProductSelectionTest extends Specification {
 
         then:
         machine.display == "PRICE $product.price.value"
+        0 * magazine.getItem(product);
 
         where:
         product       | coins
@@ -49,13 +54,15 @@ class ProductSelectionTest extends Specification {
     @Unroll
     def "should not get #product and display 'INSERT A COINS' when client doesn't insert any coins"() {
         given:
-        VendingMachine machine = new VendingMachine(Stub(ProductMagazine), Stub(CoinCassette))
+        ProductMagazine magazine = Mock();
+        VendingMachine machine = new VendingMachine(magazine, Stub(CoinCassette))
 
         when:
         machine.getProduct(product);
 
         then:
         machine.display == "INSERT A COIN"
+        0 * magazine.getItem(product);
 
         where:
         product << [Product.CANDY, Product.CHIPS, Product.COLA]
