@@ -116,7 +116,7 @@ class AcceptCoinsTest extends Specification{
         def coinCassette = Stub(CoinCassette) {
             isFull(Coin.QUARTER) >> true
         }
-        def machine = new VendingMachine(Stub(ProductMagazine), coinCassette)
+        def machine = new VendingMachine(Stub(ProductMagazine), coinCassette, Stub(MoneyChanger))
         machine.insert(Coin.QUARTER)
         machine.getDisplay()
 
@@ -132,7 +132,7 @@ class AcceptCoinsTest extends Specification{
         def coinCassette = Stub(CoinCassette) {
             isFull(Coin.QUARTER) >> true
         }
-        def machine = new VendingMachine(Stub(ProductMagazine), coinCassette)
+        def machine = new VendingMachine(Stub(ProductMagazine), coinCassette, Stub(MoneyChanger))
         machine.insert(Coin.DIME)
         machine.insert(Coin.QUARTER)
         machine.getDisplay()
@@ -149,7 +149,7 @@ class AcceptCoinsTest extends Specification{
         def coinCassette = Stub(CoinCassette) {
             isFull(Coin.QUARTER) >> true
         }
-        def machine = new VendingMachine(Stub(ProductMagazine), coinCassette)
+        def machine = new VendingMachine(Stub(ProductMagazine), coinCassette, Stub(MoneyChanger))
         machine.insert(Coin.QUARTER)
 
         when:
@@ -165,7 +165,7 @@ class AcceptCoinsTest extends Specification{
         def coinCassette = Stub(CoinCassette) {
             isFull(_) >> true
         }
-        def machine = new VendingMachine(Stub(ProductMagazine), coinCassette)
+        def machine = new VendingMachine(Stub(ProductMagazine), coinCassette, Stub(MoneyChanger))
         machine.insert(Coin.QUARTER)
         machine.getDisplay()
 

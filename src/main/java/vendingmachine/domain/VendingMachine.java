@@ -2,9 +2,14 @@ package vendingmachine.domain;
 import com.google.common.base.Optional;
 import com.google.common.base.Preconditions;
 import spockintro.commons.Money;
+
+import java.util.Collections;
+import java.util.List;
+
 import static vendingmachine.domain.Coin.PENNY;
 
 public class VendingMachine {
+    private final MoneyChanger moneyChanger;
     private Money credit;
     private final ProductMagazine magazine;
     private final CoinCassette cassette;
@@ -12,11 +17,12 @@ public class VendingMachine {
     private boolean notEnoughMoney;
     private Product recentlySelectedProduct;
 
-    public VendingMachine(ProductMagazine magazine, CoinCassette cassette) {
+    public VendingMachine(ProductMagazine magazine, CoinCassette cassette, MoneyChanger moneyChanger) {
         Preconditions.checkArgument(magazine != null, "magazine can't be null");
         Preconditions.checkArgument(cassette != null, "cassette can't be null");
         this.cassette = cassette;
         this.magazine = magazine;
+        this.moneyChanger = moneyChanger;
         this.credit = new Money(0);
         this.isRecentlyUsedTubeFull = false;
     }
@@ -82,6 +88,14 @@ public class VendingMachine {
             return Optional.of(product);
         }
         return null;
+    }
+
+    public List<Coin> order(Product product) {
+        if (credit.getValue().compareTo(product.getPrice().getValue()) == 0) {
+            return Collections.emptyList();
+        }
+        Money change = new Money(credit.getValue().subtract(product.getPrice().getValue()));
+        return moneyChanger.change(change);
     }
 
     /**
