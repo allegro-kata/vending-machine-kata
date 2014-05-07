@@ -2,6 +2,9 @@ package vendingmachine.domain;
 import com.google.common.base.Optional;
 import com.google.common.base.Preconditions;
 import spockintro.commons.Money;
+
+import java.math.BigDecimal;
+
 import static vendingmachine.domain.Coin.PENNY;
 
 public class VendingMachine {
@@ -9,6 +12,8 @@ public class VendingMachine {
     private final ProductMagazine magazine;
     private final CoinCassette cassette;
     private Boolean coinCassetteError = false;
+    private Product selectedProduct;
+    private Boolean notEnoughMoneyInserted = false;
 
     public VendingMachine(ProductMagazine magazine, CoinCassette cassette) {
         Preconditions.checkArgument(magazine != null, "magazine can't be null");
@@ -41,7 +46,13 @@ public class VendingMachine {
 
     public String getDisplay() {
         if (getCredit().isZero()) {
-            return "INSERT A COIN";
+            if (selectedProduct != null && notEnoughMoneyInserted == false) {
+                notEnoughMoneyInserted = true;
+                return "PRICE " + selectedProduct.getPrice().format();
+            } else {
+                notEnoughMoneyInserted = false;
+                return "INSERT A COIN";
+            }
         }
 
         if (coinCassetteError == true) {
@@ -49,7 +60,23 @@ public class VendingMachine {
             return "CASSETE IS FULL, SORRY";
         }
 
+        if (selectedProduct != null) {
+            int enoughMoney = getCredit().getValue().compareTo(selectedProduct.getPrice().getValue());
+            if (enoughMoney >= 0) {
+                return "THANK YOU";
+            } else if (notEnoughMoneyInserted == false) {
+                notEnoughMoneyInserted = true;
+                return "PRICE " + selectedProduct.getPrice().format();
+            } else {
+                notEnoughMoneyInserted = false;
+            }
+        }
+
         return "CREDIT "+ getCredit().format();
+    }
+
+    public void selectProduct(Product product) {
+        selectedProduct = product;
     }
 
     /**

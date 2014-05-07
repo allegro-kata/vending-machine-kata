@@ -1,9 +1,7 @@
 package vendingmachine.domain
 
 import com.google.common.base.Optional
-import spock.lang.Ignore
 import spock.lang.Specification
-import spock.lang.Unroll
 
 /**
  * Tests for user story
@@ -11,7 +9,7 @@ import spock.lang.Unroll
  *
  * @author bartosz walacik
  */
-class AcceptCoinsTest extends Specification{
+class AcceptCoinsTest extends Specification {
 
     VendingMachine vendingMachine = new VendingMachine(Stub(ProductMagazine), Stub(CoinCassette))
 
@@ -32,11 +30,11 @@ class AcceptCoinsTest extends Specification{
         vendingMachine.display == expectedValue
 
         where:
-        coin                             | expectedValue
-        Coin.NICKEL                      | "CREDIT $Coin.NICKEL.value"
-        Coin.DIME                        | "CREDIT $Coin.DIME.value"
-        Coin.PENNY                       | "INSERT A COIN"
-        Coin.QUARTER                     | "CREDIT $Coin.QUARTER.value"
+        coin         | expectedValue
+        Coin.NICKEL  | "CREDIT $Coin.NICKEL.value"
+        Coin.DIME    | "CREDIT $Coin.DIME.value"
+        Coin.PENNY   | "INSERT A COIN"
+        Coin.QUARTER | "CREDIT $Coin.QUARTER.value"
     }
 
     def "should accept series of valid coins and should display the Credit"() {
@@ -68,7 +66,7 @@ class AcceptCoinsTest extends Specification{
     def "should reject coin on full cassete"() {
         given:
         CoinCassette coinCassette = Stub() {
-            push(Coin.DIME) >> {throw new FullTubeException()}
+            push(Coin.DIME) >> { throw new FullTubeException() }
         }
         VendingMachine vendingMachine = new VendingMachine(Stub(ProductMagazine), coinCassette)
 
