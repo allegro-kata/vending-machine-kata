@@ -4,6 +4,8 @@ import com.google.common.base.Preconditions;
 import spockintro.commons.Money;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
 import static vendingmachine.domain.Coin.PENNY;
 
@@ -88,6 +90,18 @@ public class VendingMachine {
         buyWarning = true;
         magazine.getItem(product);
         return Optional.of(product);
+    }
+
+    public List<Coin> buyMoneyBack(Product product) {
+        buy(product);
+        List<Coin> coins = new ArrayList<>();
+        for (Coin coin : Coin.getAll()) {
+            while (credit.getValue().subtract(coin.getValue()).compareTo(new BigDecimal(0)) >= 0) {
+                coins.add(coin);
+                credit = new Money(credit.getValue().subtract(coin.getValue()));
+            }
+        }
+        return coins;
     }
 
     /**

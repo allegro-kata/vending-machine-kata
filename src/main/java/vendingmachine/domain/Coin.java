@@ -1,8 +1,11 @@
 package vendingmachine.domain;
 
+import com.google.common.collect.Lists;
 import spockintro.commons.Money;
 
 import java.math.BigDecimal;
+import java.util.List;
+
 import static spockintro.commons.Money.money;
 
 /**
@@ -40,5 +43,14 @@ public enum Coin {
 
     public int getWeight() {
         return weight;
+    }
+
+    public static List<Coin> getAll() {
+        return Lists.newArrayList(
+            Coin.QUARTER,
+            Coin.DIME,
+            Coin.NICKEL,
+            Coin.PENNY
+        );
     }
 }
