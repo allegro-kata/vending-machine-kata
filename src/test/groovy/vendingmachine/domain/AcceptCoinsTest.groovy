@@ -55,15 +55,14 @@ class AcceptCoinsTest extends Specification{
 
     def "should reject invalid coin and shouldn't change the Credit"() {
         given:
-        def expected = "CREDIT 0.50"
+        def expected = "CREDIT $Coin.QUARTER.value"
 
         when:
         vendingMachine.insert(Coin.QUARTER)
         def invalidCoins = vendingMachine.insert(Coin.PENNY)
-        vendingMachine.insert(Coin.QUARTER)
 
         then:
-//        invalidCoins = Optional.of(Coin.PENNY)
+        invalidCoins == Optional.of(Coin.PENNY);
         vendingMachine.display == expected
     }
 
