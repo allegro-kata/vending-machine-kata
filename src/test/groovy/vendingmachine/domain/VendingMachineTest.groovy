@@ -51,6 +51,7 @@ class VendingMachineTest extends Specification {
 
         then:
         vendingMachine.display == "THANK YOU"
+        vendingMachine.display == "INSERT A COIN"
 
         where:
         product         | productPrice

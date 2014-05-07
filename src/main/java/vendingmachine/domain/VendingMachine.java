@@ -57,12 +57,14 @@ public class VendingMachine {
 
         if (coinCassetteError == true) {
             coinCassetteError = false;
-            return "CASSETE IS FULL, SORRY";
+            return "CASSETTE IS FULL, SORRY";
         }
 
         if (selectedProduct != null) {
             int enoughMoney = getCredit().getValue().compareTo(selectedProduct.getPrice().getValue());
             if (enoughMoney >= 0) {
+                credit = new Money(0);
+                selectedProduct = null;
                 return "THANK YOU";
             } else if (notEnoughMoneyInserted == false) {
                 notEnoughMoneyInserted = true;
