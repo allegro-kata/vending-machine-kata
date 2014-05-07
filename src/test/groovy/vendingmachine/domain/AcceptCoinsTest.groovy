@@ -35,12 +35,13 @@ class AcceptCoinsTest extends Specification{
 
     def "should accept series of valid coins and should display the Credit"() {
         given:
+            def expectedValue = Coin.DIME.value + Coin.DIME.value
             def vendingMachine = new VendingMachine(Mock(ProductMagazine), Mock(CoinCassette))
         when:
             vendingMachine.insert(Coin.DIME)
             vendingMachine.insert(Coin.DIME)
         then:
-            vendingMachine.display == "CREDIT 0.20"
+            vendingMachine.display == "CREDIT " + expectedValue
     }
 
     
