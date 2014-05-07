@@ -1,6 +1,8 @@
 package vendingmachine.domain;
 import com.google.common.base.Optional;
 import com.google.common.base.Preconditions;
+import com.google.common.base.Strings;
+import static com.google.common.base.Strings.isNullOrEmpty;
 import spockintro.commons.Money;
 import static vendingmachine.domain.Coin.PENNY;
 
@@ -8,6 +10,7 @@ public class VendingMachine {
     private Money credit;
     private final ProductMagazine magazine;
     private final CoinCassette cassette;
+    private boolean casseteFullWarning;
 
     public VendingMachine(ProductMagazine magazine, CoinCassette cassette) {
         Preconditions.checkArgument(magazine != null, "magazine can't be null");
@@ -30,11 +33,21 @@ public class VendingMachine {
             return Optional.of(PENNY);
         }
 
-        coinAccepted(coin);
+        try {
+            coinAccepted(coin);
+        } catch (FullTubeException e) {
+            casseteFullWarning = true;
+            return Optional.of(coin);
+        }
         return Optional.absent();
     }
 
     public String getDisplay() {
+        if (casseteFullWarning) {
+            casseteFullWarning = false;
+            return "CASSETTE IS FULL, SORRY";
+        }
+        
         if (getCredit().isZero()) {
             return "INSERT A COIN";
         }

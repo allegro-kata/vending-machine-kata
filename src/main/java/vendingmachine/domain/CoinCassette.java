@@ -6,7 +6,7 @@ import com.google.common.collect.Multimap;
  * This is the place, where coins are collected.
  * 4-tube based coin changer able to store 4 coin types.
  * Tube has limited capacity, typically 200.
- * <br/>
+ * <br/> 
  *
  * Full cassette can be easily replaced with empty one by serviceman.
  * <br/>

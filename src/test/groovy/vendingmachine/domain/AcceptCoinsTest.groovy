@@ -55,4 +55,38 @@ class AcceptCoinsTest extends Specification{
             vendingMachine.display == "CREDIT 0.10"
     }
 
+    def "should reject coin when cassete is full"() {
+        given:
+            def coinCassette = Stub(CoinCassette) 
+            coinCassette.push(_ as Coin) >> { throw new FullTubeException() }
+            def vendingMachine = new VendingMachine(Stub(ProductMagazine), coinCassette)
+        when:
+            def result = vendingMachine.insert(Coin.DIME)
+        then: 
+            result == Optional.of(Coin.DIME)
+    }
+
+    def "should display info when reached max capacity"() {
+        given:
+            def coinCassette = Stub(CoinCassette) 
+            coinCassette.push(_ as Coin) >> { throw new FullTubeException() }
+            def vendingMachine = new VendingMachine(Stub(ProductMagazine), coinCassette)
+        when:
+            vendingMachine.insert(Coin.DIME)
+        then: 
+            vendingMachine.display == "CASSETTE IS FULL, SORRY"
+    }
+
+    def "should remove warning from display after second invocation"() {
+        given:
+            def coinCassette = Stub(CoinCassette) 
+            coinCassette.push(_ as Coin) >> { throw new FullTubeException() }
+            def vendingMachine = new VendingMachine(Stub(ProductMagazine), coinCassette)
+        when:
+            vendingMachine.insert(Coin.DIME)
+            vendingMachine.display
+        then: 
+        vendingMachine.display == "INSERT A COIN"
+    }
+    
 }
