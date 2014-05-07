@@ -2,6 +2,9 @@ package vendingmachine.domain;
 import com.google.common.base.Optional;
 import com.google.common.base.Preconditions;
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import spockintro.commons.Money;
 import static vendingmachine.domain.Coin.PENNY;
 import vendingmachine.domain.exception.FullTubeException;
@@ -12,6 +15,7 @@ public class VendingMachine {
     private final CoinCassette cassette;
     private boolean casseteFullWarning;
     private Product selectedProduct;
+    private List<Coin> coinReturnTray = new ArrayList<>();
 
     
     public VendingMachine(ProductMagazine magazine, CoinCassette cassette) {
@@ -44,6 +48,12 @@ public class VendingMachine {
         return Optional.absent();
     }
 
+    public Product dispense() {
+        Product order = selectedProduct;
+        selectedProduct = null;
+        return order;
+    }
+    
     public String getDisplay() {
         if (casseteFullWarning) {
             casseteFullWarning = false;
@@ -53,8 +63,8 @@ public class VendingMachine {
         if (selectedProduct != null) {
             BigDecimal productPrice = selectedProduct.getPrice().getValue();
             BigDecimal requiredMoney = productPrice.subtract(getCredit().getValue());
-            if ((requiredMoney.compareTo(BigDecimal.ZERO)) == 0) {
-                selectedProduct = null;
+            if ((requiredMoney.compareTo(BigDecimal.ZERO)) <= 0) {
+                
                 return "THANK YOU";
             }
             return "PRICE $"+ requiredMoney;
@@ -87,8 +97,8 @@ public class VendingMachine {
     
     /**
      * @return unmodifiableList
-     *
-    public List<Coin> getCoinReturnTray() {
+     */
+    public List<Coin> returnCoins() {
         return Collections.unmodifiableList(coinReturnTray);
-    }*/
+    }
 }

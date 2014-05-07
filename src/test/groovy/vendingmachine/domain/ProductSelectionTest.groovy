@@ -36,8 +36,21 @@ class ProductSelectionTest extends Specification {
             vendingMachine.selectProduct(Product.CHIPS)
         when:
             2.times { vendingMachine.insert(Coin.QUARTER) }
+            vendingMachine.dispense()
         then:
             vendingMachine.display == 'THANK YOU' 
+    }
+    
+    def "return change after product is dispensed"() {
+        given:
+            def vendingMachine = new VendingMachine(Stub(ProductMagazine), Stub(CoinCassette))
+            vendingMachine.selectProduct(Product.CHIPS)
+            3.times { vendingMachine.insert(Coin.QUARTER) }
+            vendingMachine.dispense()
+        when:
+            def change = vendingMachine.returnCoins()
+        then:
+            change == [Coin.QUARTER]
     }
 
 }
