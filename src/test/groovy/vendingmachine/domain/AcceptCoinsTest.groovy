@@ -20,10 +20,10 @@ class AcceptCoinsTest extends Specification{
         def greeting = vendingMachine.display
 
         then:
-        greeting == "insert a coin".toUpperCase()
+        greeting == "INSERT A COIN"
     }
 
-    @Unroll
+    //@Unroll
     def "should accept one valid #coin and display its value as Credit"() {
         when:
         vendingMachine.insert(coin)
@@ -41,16 +41,15 @@ class AcceptCoinsTest extends Specification{
 
     def "should accept series of valid coins and should display the Credit"() {
         given:
-        def expected = "CREDIT 0.75"
+        def expectedValue = Coin.QUARTER.value + Coin.DIME.value
+        def expected = "CREDIT $expectedValue"
 
         when:
         vendingMachine.insert(Coin.QUARTER)
-        vendingMachine.insert(Coin.QUARTER)
-        vendingMachine.insert(Coin.QUARTER)
+        vendingMachine.insert(Coin.DIME)
 
         then:
         vendingMachine.display == expected
-
     }
 
     def "should reject invalid coin and shouldn't change the Credit"() {
