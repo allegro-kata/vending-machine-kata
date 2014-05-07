@@ -88,4 +88,25 @@ class CoinCassetteTest extends Specification {
         then:
         machine.display == "CREDIT $coin.value"
     }
+
+    def "should display 'insert coins' after message 'cassette is full'"(){
+
+        given:
+        def coinCassette = new CoinCassetteImpl()
+        def machine = new VendingMachine(Stub(ProductMagazine), coinCassette)
+        def coin = Coin.NICKEL
+
+        when:
+        coinCassette.setTubesCapacity(1)
+        machine.insert(coin)
+        String display1 = machine.getDisplay()
+        machine.insert(coin)
+        String display2 = machine.getDisplay()
+        String display3 = machine.getDisplay()
+
+        then:
+        display1 == "CREDIT $coin.value"
+        display2 == "CASSETTE IS FULL, SORRY"
+        display3 == "INSERT COINS"
+    }
 }
