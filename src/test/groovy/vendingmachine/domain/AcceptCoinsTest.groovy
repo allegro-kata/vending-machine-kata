@@ -11,16 +11,32 @@ import spock.lang.Unroll
  * @author bartosz walacik
  */
 class AcceptCoinsTest extends Specification{
+    ProductMagazine magazine = Stub()
+    CoinCassette cassette = Stub()
+    VendingMachine vendingMachine = new VendingMachine(magazine, cassette)
 
-    @Ignore
     def "should display 'insert a coin' when ready"() {
+        when:
+        def greeting = vendingMachine.display
 
+        then:
+        greeting == "insert a coin".toUpperCase()
     }
 
-    @Ignore
     @Unroll
     def "should accept one valid #coin and display its value as Credit"() {
+        when:
+        vendingMachine.insert(coin)
 
+        then:
+        vendingMachine.display == "CREDIT $expectedValue"
+
+        where:
+        coin                             | expectedValue
+        Coin.PENNY                       | 0.01
+        Coin.NICKEL                      | 0.05
+        Coin.DIME                        | 0.10
+        Coin.QUARTER                     | 0.25
     }
 
     @Ignore
