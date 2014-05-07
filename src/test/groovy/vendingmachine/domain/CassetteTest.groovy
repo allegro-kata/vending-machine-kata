@@ -45,6 +45,7 @@ class CassetteTest extends Specification {
         coin << [Coin.DIME, Coin.QUARTER, Coin.NICKEL]
     }
 
+    @Unroll
     def "should display credit when internal #rejectedCoin Coin Cassette is full and client inserts #insertedCoins"() {
         given:
         CoinCassette cassette = Stub() {
