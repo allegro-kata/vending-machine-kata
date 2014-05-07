@@ -2,6 +2,8 @@ package vendingmachine.domain;
 
 import java.util.ArrayList;
 import java.util.List;
+import vendingmachine.domain.exception.EmptyTubeException;
+import vendingmachine.domain.exception.FullTubeException;
 
 public class SimpleCoinCassette implements CoinCassette{
 

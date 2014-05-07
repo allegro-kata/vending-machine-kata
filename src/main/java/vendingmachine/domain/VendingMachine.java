@@ -1,17 +1,19 @@
 package vendingmachine.domain;
 import com.google.common.base.Optional;
 import com.google.common.base.Preconditions;
-import com.google.common.base.Strings;
-import static com.google.common.base.Strings.isNullOrEmpty;
+import java.math.BigDecimal;
 import spockintro.commons.Money;
 import static vendingmachine.domain.Coin.PENNY;
+import vendingmachine.domain.exception.FullTubeException;
 
 public class VendingMachine {
     private Money credit;
     private final ProductMagazine magazine;
     private final CoinCassette cassette;
     private boolean casseteFullWarning;
+    private Product selectedProduct;
 
+    
     public VendingMachine(ProductMagazine magazine, CoinCassette cassette) {
         Preconditions.checkArgument(magazine != null, "magazine can't be null");
         Preconditions.checkArgument(cassette != null, "cassette can't be null");
@@ -47,12 +49,26 @@ public class VendingMachine {
             casseteFullWarning = false;
             return "CASSETTE IS FULL, SORRY";
         }
+
+        if (selectedProduct != null) {
+            BigDecimal productPrice = selectedProduct.getPrice().getValue();
+            BigDecimal requiredMoney = productPrice.subtract(getCredit().getValue());
+            if ((requiredMoney.compareTo(BigDecimal.ZERO)) == 0) {
+                selectedProduct = null;
+                return "THANK YOU";
+            }
+            return "PRICE $"+ requiredMoney;
+        }
         
         if (getCredit().isZero()) {
             return "INSERT A COIN";
         }
 
         return "CREDIT "+ getCredit().format();
+    }
+    
+    public void selectProduct(Product selectedItem) {
+        this.selectedProduct = selectedItem;
     }
 
     /**
@@ -68,6 +84,7 @@ public class VendingMachine {
         credit = credit.add(coin.getMoney());
     }
 
+    
     /**
      * @return unmodifiableList
      *

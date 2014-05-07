@@ -1,4 +1,4 @@
-package vendingmachine.domain;
+package vendingmachine.domain.exception;
 
 public class FullTubeException extends RuntimeException {
     

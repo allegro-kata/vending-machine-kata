@@ -4,6 +4,7 @@ import com.google.common.base.Optional
 import spock.lang.Ignore
 import spock.lang.Specification
 import spock.lang.Unroll
+import vendingmachine.domain.exception.FullTubeException
 
 /**
  * Tests for user story

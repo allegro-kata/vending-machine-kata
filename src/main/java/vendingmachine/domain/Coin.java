@@ -8,7 +8,7 @@ import static spockintro.commons.Money.money;
 /**
  * @author bartosz walacik
  */
-public enum Coin {
+    public enum Coin {
     /** 1 cent coin */
     PENNY (money(0.01), 1),
 
