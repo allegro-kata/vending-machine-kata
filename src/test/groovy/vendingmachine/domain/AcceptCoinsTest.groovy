@@ -72,4 +72,69 @@ class AcceptCoinsTest extends Specification{
 
     }
 
+    @Unroll
+    def "should display 'thank you' after choosing #product"() {
+
+        given:
+        def vendingMachine = new VendingMachine(Stub(ProductMagazine), Stub(CoinCassette))
+        5.times {
+            vendingMachine.insert(coin)
+        }
+
+        when:
+        vendingMachine.pushButton(product)
+
+        then:
+        vendingMachine.display == "THANK YOU"
+
+        where:
+        product       | coin
+        Product.COLA  | Coin.QUARTER
+        Product.CHIPS | Coin.QUARTER
+        Product.CANDY | Coin.QUARTER
+
+    }
+
+    def "should not display 'thank you' after choosing #product"() {
+
+        given:
+        def vendingMachine = new VendingMachine(Stub(ProductMagazine), Stub(CoinCassette))
+        quantity.times {
+            vendingMachine.insert(coin)
+        }
+        def coinSum = quantity * coin.getValue()
+
+        when:
+        vendingMachine.pushButton(product)
+
+        then:
+        vendingMachine.display == "CREDIT " + coinSum
+
+        where:
+        product       | coin        | quantity
+        Product.COLA  | Coin.DIME   | 1
+        Product.CHIPS | Coin.NICKEL | 2
+        Product.CANDY | Coin.DIME   | 3
+
+    }
+
+    @Ignore
+    def "should display 'insert coins' when display checked again"() {
+
+        given:
+        def coin = Coin.QUARTER
+        def product = Product.CANDY
+        def vendingMachine = new VendingMachine(Stub(ProductMagazine), Stub(CoinCassette))
+        5.times {
+            vendingMachine.insert(coin)
+        }
+        vendingMachine.pushButton(product)
+
+        when:
+        vendingMachine.display
+
+        then:
+        vendingMachine.display == "INSERT COINS"
+    }
+
 }

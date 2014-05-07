@@ -39,16 +39,27 @@ public class VendingMachine {
         return Optional.absent();
     }
 
+    public void pushButton(Product product) {
+        int creditDifference = product.getPrice().getValue().compareTo(getCredit().getValue());
+        if ( creditDifference == 0 || creditDifference == -1) {
+
+            msg = "THANK YOU";
+            lastMsg = msg;
+        }
+    }
+
     public String getDisplay() {
         if (lastMsg == "CASSETTE IS FULL, SORRY") {
             lastMsg = "";
             msg = "INSERT COINS";
             return msg;
-        }
-        if (getCredit().isZero()) {
+        } else if (lastMsg == "THANK YOU") {
+            credit = new Money(0);
+            lastMsg = "THANK YOU";
+            return msg;
+        } else if (getCredit().isZero()) {
             msg = "INSERT A COIN";
-        }
-        if (msg == "") {
+        } else if (msg == "") {
             return "CREDIT " + getCredit().format();
         }
 
