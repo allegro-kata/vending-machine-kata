@@ -15,7 +15,7 @@ class AcceptCoinsTest extends Specification{
 
     def "should display 'insert a coin' when ready"() {
         given:
-            def vendingMachine = new VendingMachine(Mock(ProductMagazine), Mock(CoinCassette))
+            def vendingMachine = new VendingMachine(Stub(ProductMagazine), Stub(CoinCassette))
         expect:        
             vendingMachine.display == "INSERT A COIN"
     }
@@ -33,11 +33,16 @@ class AcceptCoinsTest extends Specification{
     }
 
     def "should accept series of valid coins and should display the Credit"() {
-        
-        
+        given:
+            def vendingMachine = new VendingMachine(Mock(ProductMagazine), Mock(CoinCassette))
+        when:
+            vendingMachine.insert(Coin.DIME)
+            vendingMachine.insert(Coin.DIME)
+        then:
+            vendingMachine.display == "CREDIT 0.20"
     }
 
-    @Ignore
+    @Igno
     def "should reject invalid coin and shouldn't change the Credit"() {
 
     }
