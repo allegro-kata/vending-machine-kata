@@ -1,5 +1,6 @@
 package vendingmachine.domain
 
+import com.google.common.base.Optional
 import spock.lang.Ignore
 import spock.lang.Specification
 import spock.lang.Unroll
@@ -11,9 +12,8 @@ import spock.lang.Unroll
  * @author bartosz walacik
  */
 class AcceptCoinsTest extends Specification{
-    ProductMagazine magazine = Stub()
-    CoinCassette cassette = Stub()
-    VendingMachine vendingMachine = new VendingMachine(magazine, cassette)
+
+    VendingMachine vendingMachine = new VendingMachine(Stub(ProductMagazine), Stub(CoinCassette))
 
     def "should display 'insert a coin' when ready"() {
         when:
@@ -29,24 +29,42 @@ class AcceptCoinsTest extends Specification{
         vendingMachine.insert(coin)
 
         then:
-        vendingMachine.display == "CREDIT $expectedValue"
+        vendingMachine.display == expectedValue
 
         where:
         coin                             | expectedValue
-        Coin.PENNY                       | 0.01
-        Coin.NICKEL                      | 0.05
-        Coin.DIME                        | 0.10
-        Coin.QUARTER                     | 0.25
+        Coin.NICKEL                      | "CREDIT $Coin.NICKEL.value"
+        Coin.DIME                        | "CREDIT $Coin.DIME.value"
+        Coin.PENNY                       | "INSERT A COIN"
+        Coin.QUARTER                     | "CREDIT $Coin.QUARTER.value"
     }
 
-    @Ignore
     def "should accept series of valid coins and should display the Credit"() {
+        given:
+        def expected = "CREDIT 0.75"
+
+        when:
+        vendingMachine.insert(Coin.QUARTER)
+        vendingMachine.insert(Coin.QUARTER)
+        vendingMachine.insert(Coin.QUARTER)
+
+        then:
+        vendingMachine.display == expected
 
     }
 
-    @Ignore
     def "should reject invalid coin and shouldn't change the Credit"() {
+        given:
+        def expected = "CREDIT 0.50"
 
+        when:
+        vendingMachine.insert(Coin.QUARTER)
+        def invalidCoins = vendingMachine.insert(Coin.PENNY)
+        vendingMachine.insert(Coin.QUARTER)
+
+        then:
+//        invalidCoins = Optional.of(Coin.PENNY)
+        vendingMachine.display == expected
     }
 
 }
