@@ -13,7 +13,7 @@ import spock.lang.Unroll
 class MyCassetteTest extends Specification{
 
     @Unroll
-    def "should return cassette full #result for #times times adding one type of coin"() {
+    def "should tube be full after proper coin quantity push"() {
         given:
         def cassette = new MyCassette();
 
@@ -45,7 +45,7 @@ class MyCassetteTest extends Specification{
     }
 
     @Unroll
-    def "should tube not be empty"() {
+    def "should tube not be empty after coin push"() {
         given:
         def cassette = new MyCassette();
 
