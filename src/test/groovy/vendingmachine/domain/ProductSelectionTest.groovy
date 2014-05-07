@@ -35,8 +35,7 @@ class ProductSelectionTest extends Specification {
             def vendingMachine = new VendingMachine(Stub(ProductMagazine), Stub(CoinCassette))
             vendingMachine.selectProduct(Product.CHIPS)
         when:
-            vendingMachine.insert(Coin.QUARTER)
-            vendingMachine.insert(Coin.QUARTER)
+            2.times { vendingMachine.insert(Coin.QUARTER) }
         then:
             vendingMachine.display == 'THANK YOU' 
     }
