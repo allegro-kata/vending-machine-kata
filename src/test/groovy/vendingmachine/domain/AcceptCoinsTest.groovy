@@ -12,14 +12,34 @@ import spock.lang.Unroll
  */
 class AcceptCoinsTest extends Specification{
 
-    @Ignore
     def "should display 'insert a coin' when ready"() {
+        given:
+        ProductMagazine magazine = Stub()
+        CoinCassette cassette = Stub()
+        VendingMachine machine = new VendingMachine(magazine, cassette)
+
+        when:
+        def display = machine.getDisplay()
+
+        then:
+        display == "INSERT A COIN"
 
     }
 
-    @Ignore
     @Unroll
     def "should accept one valid #coin and display its value as Credit"() {
+        given:
+        //Coin coin = new Coin()
+        ProductMagazine magazine = Stub()
+        CoinCassette cassette = Stub()
+        VendingMachine machine = new VendingMachine(magazine, cassette)
+
+        when:
+        machine.insert(Coin.NICKEL)
+        def display = machine.getDisplay()
+
+        then:
+        display == "CREDIT 0.05"
 
     }
 
