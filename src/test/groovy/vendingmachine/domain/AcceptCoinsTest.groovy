@@ -21,15 +21,16 @@ class AcceptCoinsTest extends Specification{
     }
 
     @Unroll
-    def "should accept one valid #coin and display its value as Credit"(Coin coin, Optional<Coin> result) {
+    def "should accept one valid #coin and display its value as Credit"(Coin coin, Optional<Coin> result, display) {
         when:
             def vendingMachine = new VendingMachine(Mock(ProductMagazine), Mock(CoinCassette))
         then:
             result == vendingMachine.insert(coin)
+            display == vendingMachine.getDisplay()
         where:
-            coin       | result
-            Coin.DIME  | Optional.absent()
-            Coin.PENNY | Optional.of(Coin.PENNY)
+            coin       | result                 | display
+            Coin.DIME  | Optional.absent()      | "CREDIT 0.10"
+            Coin.PENNY | Optional.of(Coin.PENNY)| "INSERT A COIN"
     }
 
     def "should accept series of valid coins and should display the Credit"() {
