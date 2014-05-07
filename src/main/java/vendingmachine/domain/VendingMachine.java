@@ -2,12 +2,15 @@ package vendingmachine.domain;
 import com.google.common.base.Optional;
 import com.google.common.base.Preconditions;
 import spockintro.commons.Money;
+
 import static vendingmachine.domain.Coin.PENNY;
+
 
 public class VendingMachine {
     private Money credit;
     private final ProductMagazine magazine;
     private final CoinCassette cassette;
+    private String errorString;
 
     public VendingMachine(ProductMagazine magazine, CoinCassette cassette) {
         Preconditions.checkArgument(magazine != null, "magazine can't be null");
@@ -30,11 +33,21 @@ public class VendingMachine {
             return Optional.of(PENNY);
         }
 
-        coinAccepted(coin);
+        try {
+            coinAccepted(coin);
+        } catch (FullTubeException ex) {
+            errorString = "CASSETTE IS FULL, SORRY";
+            return Optional.of(coin);
+        }
         return Optional.absent();
     }
 
     public String getDisplay() {
+        if (errorString != null) {
+            String returnedString = errorString;
+            errorString = null;
+            return returnedString;
+        }
         if (getCredit().isZero()) {
             return "INSERT A COIN";
         }
@@ -50,7 +63,10 @@ public class VendingMachine {
         return credit;
     }
 
-    private void coinAccepted(Coin coin){
+    /**
+     * @param coin
+     */
+    private void coinAccepted(Coin coin) throws FullTubeException {
         cassette.push(coin);
         credit = credit.add(coin.getMoney());
     }
