@@ -8,6 +8,7 @@ public class VendingMachine {
     private Money credit;
     private final ProductMagazine magazine;
     private final CoinCassette cassette;
+    private Boolean coinCassetteError = false;
 
     public VendingMachine(ProductMagazine magazine, CoinCassette cassette) {
         Preconditions.checkArgument(magazine != null, "magazine can't be null");
@@ -30,13 +31,22 @@ public class VendingMachine {
             return Optional.of(PENNY);
         }
 
-        coinAccepted(coin);
+        try {
+            coinAccepted(coin);
+        } catch (FullTubeException ex) {
+            coinCassetteError = true;
+        }
         return Optional.absent();
     }
 
     public String getDisplay() {
         if (getCredit().isZero()) {
             return "INSERT A COIN";
+        }
+
+        if (coinCassetteError == true) {
+            coinCassetteError = false;
+            return "CASSETE IS FULL, SORRY";
         }
 
         return "CREDIT "+ getCredit().format();
@@ -50,7 +60,7 @@ public class VendingMachine {
         return credit;
     }
 
-    private void coinAccepted(Coin coin){
+    private void coinAccepted(Coin coin) throws FullTubeException {
         cassette.push(coin);
         credit = credit.add(coin.getMoney());
     }

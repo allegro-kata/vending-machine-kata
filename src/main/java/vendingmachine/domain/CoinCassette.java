@@ -23,10 +23,10 @@ public interface CoinCassette {
     /**
      * @throws FullTubeException
      */
-    void push(Coin toTube);
+    void push(Coin toTube) throws FullTubeException;
 
     /**
      * @throws EmptyTubeException
      */
-    void pop(Coin fromTube);
+    void pop(Coin fromTube)throws EmptyTubeException;
 }

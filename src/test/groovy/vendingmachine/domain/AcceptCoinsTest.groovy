@@ -66,4 +66,25 @@ class AcceptCoinsTest extends Specification{
         vendingMachine.display == expected
     }
 
+    def "should reject coin on full cassete"() {
+        given:
+        CoinCassette coinCassette = Stub() {
+            push(Coin.DIME) >> {throw new FullTubeException()}
+        }
+        VendingMachine vendingMachine = new VendingMachine(Stub(ProductMagazine), coinCassette)
+
+        when:
+        vendingMachine.insert(Coin.DIME)
+        def displayAfterInsertingCoinToFullCubeAndEmptyCredit = vendingMachine.getDisplay()
+        vendingMachine.insert(Coin.QUARTER)
+        def displayCassetteFull = vendingMachine.getDisplay()
+        def display2 = vendingMachine.getDisplay()
+
+        then:
+        displayCassetteFull == "CASSETE IS FULL, SORRY"
+        display2 == "CREDIT $Coin.QUARTER.value"
+        displayAfterInsertingCoinToFullCubeAndEmptyCredit == "INSERT A COIN"
+
+    }
+
 }
