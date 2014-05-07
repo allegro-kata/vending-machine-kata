@@ -67,9 +67,9 @@ class GroovyFeaturesTest extends Specification {
         def product = new ProductPOGOv3(name: "Candy")
 
         when:
-        def productName = product.getName {
+        def productName = product.getName ({
             name -> "The best $name"
-        }
+        })
 
         then:
         productName == "The best Candy"
@@ -147,5 +147,22 @@ class GroovyFeaturesTest extends Specification {
 
             """() {
         expect: true
+    }
+
+    class Tejst {
+        private String privateToString() {
+            "123"
+        }
+        String toString() {
+            privateToString()
+        }
+    }
+    def "should override object method"() {
+        def o = new Tejst()
+        o.metaClass.privateToString = { "tejst" }
+        def oo = new Tejst()
+        expect:
+            o.toString() == "tejst"
+            oo.toString() == "123"
     }
 }

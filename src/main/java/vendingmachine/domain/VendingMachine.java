@@ -9,6 +9,8 @@ public class VendingMachine {
     private final ProductMagazine magazine;
     private final CoinCassette cassette;
     private boolean isRecentlyUsedTubeFull;
+    private boolean notEnoughMoney;
+    private Product recentlySelectedProduct;
 
     public VendingMachine(ProductMagazine magazine, CoinCassette cassette) {
         Preconditions.checkArgument(magazine != null, "magazine can't be null");
@@ -44,6 +46,9 @@ public class VendingMachine {
     }
 
     public String getDisplay() {
+        if (notEnoughMoney) {
+            return "PRICE " + recentlySelectedProduct.getPrice();
+        }
         if (isRecentlyUsedTubeFull) {
             this.isRecentlyUsedTubeFull = false;
             return "CASSETTE IS FULL, SORRY";
@@ -66,6 +71,17 @@ public class VendingMachine {
     private void coinAccepted(Coin coin){
         cassette.push(coin);
         credit = credit.add(coin.getMoney());
+    }
+
+    public Optional<Product> orderProduct(Product product) {
+        if (credit.getValue().compareTo(product.getPrice().getValue()) < 0) {
+            recentlySelectedProduct = product;
+            notEnoughMoney = true;
+        }
+        if (!magazine.isEmpty(product)) {
+            return Optional.of(product);
+        }
+        return null;
     }
 
     /**
